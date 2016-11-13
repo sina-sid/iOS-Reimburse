@@ -50,9 +50,6 @@
                                 <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="176" width="400" height="169"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIy-Wh-mBk">
                                 <rect key="frame" x="20" y="20" width="46" height="65"/>
@@ -183,6 +180,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oPx-mZ-mDH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B5A-rk-i5w" customClass="logi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Andrew ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-bS-fih">
