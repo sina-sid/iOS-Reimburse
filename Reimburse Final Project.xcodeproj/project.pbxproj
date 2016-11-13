@@ -19,6 +19,7 @@
 		061635491DD396A400EBC29E /* title.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061635481DD396A400EBC29E /* title.jpg */; };
 		06E8CD011DD8FD700055CF9B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E8CD001DD8FD700055CF9B /* LoginViewController.swift */; };
 		06E8CD081DD9014D0055CF9B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E8CD071DD9014D0055CF9B /* NavigationController.swift */; };
+		06E8CD0C1DD906530055CF9B /* StudentDashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06E8CD0B1DD906530055CF9B /* StudentDashboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		061635481DD396A400EBC29E /* title.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = title.jpg; path = "Reimburse Final Poject/title.jpg"; sourceTree = "<group>"; };
 		06E8CD001DD8FD700055CF9B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		06E8CD071DD9014D0055CF9B /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		06E8CD0B1DD906530055CF9B /* StudentDashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StudentDashboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +110,12 @@
 		061635141DD38B4F00EBC29E /* Reimburse Final Poject */ = {
 			isa = PBXGroup;
 			children = (
-				061635151DD38B4F00EBC29E /* AppDelegate.swift */,
 				06E8CD031DD8FD920055CF9B /* Models */,
-				06E8CD041DD8FD9C0055CF9B /* Storyboards */,
-				06E8CD021DD8FD790055CF9B /* ViewControllers */,
+				06E8CD091DD9058E0055CF9B /* Main Storyboard */,
+				061635151DD38B4F00EBC29E /* AppDelegate.swift */,
+				06E8CD071DD9014D0055CF9B /* NavigationController.swift */,
+				0616351E1DD38B4F00EBC29E /* LaunchScreen.storyboard */,
+				06E8CD0A1DD906210055CF9B /* Student Dashboard */,
 				0616351C1DD38B4F00EBC29E /* Assets.xcassets */,
 				061635211DD38B4F00EBC29E /* Info.plist */,
 			);
@@ -148,16 +152,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		06E8CD021DD8FD790055CF9B /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				06E8CD071DD9014D0055CF9B /* NavigationController.swift */,
-				061635171DD38B4F00EBC29E /* ViewController.swift */,
-				06E8CD001DD8FD700055CF9B /* LoginViewController.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
 		06E8CD031DD8FD920055CF9B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,13 +159,22 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		06E8CD041DD8FD9C0055CF9B /* Storyboards */ = {
+		06E8CD091DD9058E0055CF9B /* Main Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				061635191DD38B4F00EBC29E /* Main.storyboard */,
-				0616351E1DD38B4F00EBC29E /* LaunchScreen.storyboard */,
+				06E8CD001DD8FD700055CF9B /* LoginViewController.swift */,
+				061635171DD38B4F00EBC29E /* ViewController.swift */,
 			);
-			name = Storyboards;
+			name = "Main Storyboard";
+			sourceTree = "<group>";
+		};
+		06E8CD0A1DD906210055CF9B /* Student Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				06E8CD0B1DD906530055CF9B /* StudentDashboard.storyboard */,
+			);
+			name = "Student Dashboard";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +286,7 @@
 				061635491DD396A400EBC29E /* title.jpg in Resources */,
 				0616351D1DD38B4F00EBC29E /* Assets.xcassets in Resources */,
 				061635471DD393F800EBC29E /* divider.png in Resources */,
+				06E8CD0C1DD906530055CF9B /* StudentDashboard.storyboard in Resources */,
 				0616351B1DD38B4F00EBC29E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
