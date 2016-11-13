@@ -17,6 +17,8 @@
 		061635441DD38D4B00EBC29E /* 28888697320_1f517f3ee9_k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061635431DD38D4B00EBC29E /* 28888697320_1f517f3ee9_k.jpg */; };
 		061635471DD393F800EBC29E /* divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 061635461DD393F800EBC29E /* divider.png */; };
 		061635491DD396A400EBC29E /* title.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061635481DD396A400EBC29E /* title.jpg */; };
+		06E8CD011DD8FD700055CF9B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E8CD001DD8FD700055CF9B /* LoginViewController.swift */; };
+		06E8CD081DD9014D0055CF9B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E8CD071DD9014D0055CF9B /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		061635431DD38D4B00EBC29E /* 28888697320_1f517f3ee9_k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28888697320_1f517f3ee9_k.jpg; path = "Reimburse Final Poject/28888697320_1f517f3ee9_k.jpg"; sourceTree = "<group>"; };
 		061635461DD393F800EBC29E /* divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = divider.png; path = "Reimburse Final Poject/divider.png"; sourceTree = "<group>"; };
 		061635481DD396A400EBC29E /* title.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = title.jpg; path = "Reimburse Final Poject/title.jpg"; sourceTree = "<group>"; };
+		06E8CD001DD8FD700055CF9B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		06E8CD071DD9014D0055CF9B /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				061635151DD38B4F00EBC29E /* AppDelegate.swift */,
-				061635171DD38B4F00EBC29E /* ViewController.swift */,
-				061635191DD38B4F00EBC29E /* Main.storyboard */,
+				06E8CD031DD8FD920055CF9B /* Models */,
+				06E8CD041DD8FD9C0055CF9B /* Storyboards */,
+				06E8CD021DD8FD790055CF9B /* ViewControllers */,
 				0616351C1DD38B4F00EBC29E /* Assets.xcassets */,
-				0616351E1DD38B4F00EBC29E /* LaunchScreen.storyboard */,
 				061635211DD38B4F00EBC29E /* Info.plist */,
 			);
 			path = "Reimburse Final Poject";
@@ -140,6 +144,32 @@
 				061635431DD38D4B00EBC29E /* 28888697320_1f517f3ee9_k.jpg */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		06E8CD021DD8FD790055CF9B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				06E8CD071DD9014D0055CF9B /* NavigationController.swift */,
+				061635171DD38B4F00EBC29E /* ViewController.swift */,
+				06E8CD001DD8FD700055CF9B /* LoginViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		06E8CD031DD8FD920055CF9B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		06E8CD041DD8FD9C0055CF9B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				061635191DD38B4F00EBC29E /* Main.storyboard */,
+				0616351E1DD38B4F00EBC29E /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +306,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E8CD011DD8FD700055CF9B /* LoginViewController.swift in Sources */,
+				06E8CD081DD9014D0055CF9B /* NavigationController.swift in Sources */,
 				061635181DD38B4F00EBC29E /* ViewController.swift in Sources */,
 				061635161DD38B4F00EBC29E /* AppDelegate.swift in Sources */,
 			);
@@ -504,6 +536,7 @@
 				0616353C1DD38B5000EBC29E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0616353D1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final PojectTests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +545,7 @@
 				0616353F1DD38B5000EBC29E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		061635401DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final PojectUITests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +554,7 @@
 				061635421DD38B5000EBC29E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

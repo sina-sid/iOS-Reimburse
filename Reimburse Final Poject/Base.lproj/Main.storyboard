@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1912" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1912" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dlt-md-R0q">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -45,38 +45,14 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMm-z2-oDV">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.52156862745098043" green="0.0" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="199" id="Q7C-ak-cle"/>
-                                    <constraint firstAttribute="height" constant="50" id="Yae-KE-5R8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Q7C-ak-cle"/>
-                                        <exclude reference="Yae-KE-5R8"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="Q7C-ak-cle"/>
-                                        <include reference="Yae-KE-5R8"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <segue destination="uS9-5D-g6R" kind="modal" id="Qjj-Di-vzN"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reimburse" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj5-Sx-fec">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="176" width="400" height="169"/>
+                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIy-Wh-mBk">
                                 <rect key="frame" x="20" y="20" width="46" height="65"/>
@@ -102,6 +78,33 @@
                                     </mask>
                                 </variation>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMm-z2-oDV">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.52156862745098043" green="0.0" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="199" id="Q7C-ak-cle"/>
+                                    <constraint firstAttribute="height" constant="50" id="Yae-KE-5R8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Q7C-ak-cle"/>
+                                        <exclude reference="Yae-KE-5R8"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Q7C-ak-cle"/>
+                                        <include reference="Yae-KE-5R8"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="ZmY-np-o96" kind="push" id="B4f-zM-fcC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -122,9 +125,9 @@
                             <mask key="subviews">
                                 <exclude reference="wkG-V7-pA1"/>
                                 <exclude reference="x4d-xM-wWt"/>
-                                <exclude reference="tMm-z2-oDV"/>
                                 <exclude reference="fj5-Sx-fec"/>
                                 <exclude reference="aIy-Wh-mBk"/>
+                                <exclude reference="tMm-z2-oDV"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="NQ2-ue-mIn"/>
@@ -145,9 +148,9 @@
                             <mask key="subviews">
                                 <include reference="wkG-V7-pA1"/>
                                 <include reference="x4d-xM-wWt"/>
-                                <include reference="tMm-z2-oDV"/>
                                 <include reference="fj5-Sx-fec"/>
                                 <include reference="aIy-Wh-mBk"/>
+                                <include reference="tMm-z2-oDV"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="NQ2-ue-mIn"/>
@@ -165,61 +168,112 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="cQM-t0-mSp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.5" y="418"/>
+            <point key="canvasLocation" x="1222.5" y="418"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="eU2-tZ-iTa">
+        <!--Login-->
+        <scene sceneID="tdC-l5-mNi">
             <objects>
-                <viewController id="uS9-5D-g6R" sceneMemberID="viewController">
+                <viewController id="ZmY-np-o96" customClass="LoginViewController" customModule="Reimburse_Final_Poject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OnL-LD-Awg"/>
-                        <viewControllerLayoutGuide type="bottom" id="sk2-NT-kyO"/>
+                        <viewControllerLayoutGuide type="top" id="Fda-t7-bNy"/>
+                        <viewControllerLayoutGuide type="bottom" id="oPx-mZ-mDH"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mhk-8q-yJ0">
+                    <view key="view" contentMode="scaleToFill" id="B5A-rk-i5w" customClass="logi">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMk-29-pv7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <color key="backgroundColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Andrew ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BPY-bS-fih">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
+                                    <rect key="frame" x="37" y="146" width="327" height="30"/>
                                 </variation>
-                            </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OnQ-yI-wtL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem title="Create New Reimbursement Request" width="382" id="Eth-GA-toe">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" red="0.52156862749999999" green="0.0" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsi-NM-zmX">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="556" width="400" height="44"/>
+                                    <rect key="frame" x="37" y="209" width="327" height="30"/>
                                 </variation>
-                            </toolbar>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5C-bw-Udm">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.52156862749999999" green="0.0" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="158" y="265" width="85" height="34"/>
+                                </variation>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not a member yet?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ao-zZ-YTq">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="87" y="339" width="146" height="21"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGC-c1-VHt">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Register here!">
+                                    <color key="titleColor" red="0.52156862749999999" green="0.0" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="212" y="333" width="103" height="34"/>
+                                </variation>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.12" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="jMk-29-pv7"/>
-                                <exclude reference="OnQ-yI-wtL"/>
+                                <exclude reference="BPY-bS-fih"/>
+                                <exclude reference="Fsi-NM-zmX"/>
+                                <exclude reference="R5C-bw-Udm"/>
+                                <exclude reference="8ao-zZ-YTq"/>
+                                <exclude reference="qGC-c1-VHt"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="jMk-29-pv7"/>
-                                <include reference="OnQ-yI-wtL"/>
+                                <include reference="BPY-bS-fih"/>
+                                <include reference="Fsi-NM-zmX"/>
+                                <include reference="R5C-bw-Udm"/>
+                                <include reference="8ao-zZ-YTq"/>
+                                <include reference="qGC-c1-VHt"/>
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Login" id="uY5-6f-dmk"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="go8-Pg-RwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YnN-8P-PfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036.5" y="418"/>
+            <point key="canvasLocation" x="304.5" y="1196"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hoa-eP-gDC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dlt-md-R0q" customClass="NavigationController" customModule="Reimburse_Final_Poject" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gIJ-Zk-EQK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="g6n-32-0aw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9MZ-Ye-geH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.5" y="418"/>
         </scene>
     </scenes>
     <resources>
