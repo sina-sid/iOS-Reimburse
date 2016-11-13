@@ -39,17 +39,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		061635121DD38B4F00EBC29E /* Reimburse Final Poject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reimburse Final Poject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		061635121DD38B4F00EBC29E /* Reimburse Final Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reimburse Final Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061635151DD38B4F00EBC29E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		061635171DD38B4F00EBC29E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0616351A1DD38B4F00EBC29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0616351C1DD38B4F00EBC29E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0616351F1DD38B4F00EBC29E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		061635211DD38B4F00EBC29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		061635261DD38B4F00EBC29E /* Reimburse Final PojectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reimburse Final PojectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		061635261DD38B4F00EBC29E /* Reimburse Final Project.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reimburse Final Project.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0616352A1DD38B5000EBC29E /* Reimburse_Final_PojectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reimburse_Final_PojectTests.swift; sourceTree = "<group>"; };
 		0616352C1DD38B5000EBC29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		061635311DD38B5000EBC29E /* Reimburse Final PojectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reimburse Final PojectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		061635311DD38B5000EBC29E /* Reimburse Final Project.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reimburse Final Project.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		061635351DD38B5000EBC29E /* Reimburse_Final_PojectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reimburse_Final_PojectUITests.swift; sourceTree = "<group>"; };
 		061635371DD38B5000EBC29E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		061635431DD38D4B00EBC29E /* 28888697320_1f517f3ee9_k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 28888697320_1f517f3ee9_k.jpg; path = "Reimburse Final Poject/28888697320_1f517f3ee9_k.jpg"; sourceTree = "<group>"; };
@@ -89,8 +89,8 @@
 			children = (
 				061635451DD38E9000EBC29E /* Images */,
 				061635141DD38B4F00EBC29E /* Reimburse Final Poject */,
-				061635291DD38B4F00EBC29E /* Reimburse Final PojectTests */,
-				061635341DD38B5000EBC29E /* Reimburse Final PojectUITests */,
+				061635291DD38B4F00EBC29E /* Reimburse Final ProjectTests */,
+				061635341DD38B5000EBC29E /* Reimburse Final ProjectUITests */,
 				061635131DD38B4F00EBC29E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,9 +98,9 @@
 		061635131DD38B4F00EBC29E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				061635121DD38B4F00EBC29E /* Reimburse Final Poject.app */,
-				061635261DD38B4F00EBC29E /* Reimburse Final PojectTests.xctest */,
-				061635311DD38B5000EBC29E /* Reimburse Final PojectUITests.xctest */,
+				061635121DD38B4F00EBC29E /* Reimburse Final Project.app */,
+				061635261DD38B4F00EBC29E /* Reimburse Final Project.xctest */,
+				061635311DD38B5000EBC29E /* Reimburse Final Project.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,21 +118,23 @@
 			path = "Reimburse Final Poject";
 			sourceTree = "<group>";
 		};
-		061635291DD38B4F00EBC29E /* Reimburse Final PojectTests */ = {
+		061635291DD38B4F00EBC29E /* Reimburse Final ProjectTests */ = {
 			isa = PBXGroup;
 			children = (
 				0616352A1DD38B5000EBC29E /* Reimburse_Final_PojectTests.swift */,
 				0616352C1DD38B5000EBC29E /* Info.plist */,
 			);
+			name = "Reimburse Final ProjectTests";
 			path = "Reimburse Final PojectTests";
 			sourceTree = "<group>";
 		};
-		061635341DD38B5000EBC29E /* Reimburse Final PojectUITests */ = {
+		061635341DD38B5000EBC29E /* Reimburse Final ProjectUITests */ = {
 			isa = PBXGroup;
 			children = (
 				061635351DD38B5000EBC29E /* Reimburse_Final_PojectUITests.swift */,
 				061635371DD38B5000EBC29E /* Info.plist */,
 			);
+			name = "Reimburse Final ProjectUITests";
 			path = "Reimburse Final PojectUITests";
 			sourceTree = "<group>";
 		};
@@ -175,9 +177,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		061635111DD38B4F00EBC29E /* Reimburse Final Poject */ = {
+		061635111DD38B4F00EBC29E /* Reimburse Final Project */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0616353A1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final Poject" */;
+			buildConfigurationList = 0616353A1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final Project" */;
 			buildPhases = (
 				0616350E1DD38B4F00EBC29E /* Sources */,
 				0616350F1DD38B4F00EBC29E /* Frameworks */,
@@ -187,14 +189,14 @@
 			);
 			dependencies = (
 			);
-			name = "Reimburse Final Poject";
+			name = "Reimburse Final Project";
 			productName = "Reimburse Final Poject";
-			productReference = 061635121DD38B4F00EBC29E /* Reimburse Final Poject.app */;
+			productReference = 061635121DD38B4F00EBC29E /* Reimburse Final Project.app */;
 			productType = "com.apple.product-type.application";
 		};
-		061635251DD38B4F00EBC29E /* Reimburse Final PojectTests */ = {
+		061635251DD38B4F00EBC29E /* Reimburse Final ProjectTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0616353D1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final PojectTests" */;
+			buildConfigurationList = 0616353D1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final ProjectTests" */;
 			buildPhases = (
 				061635221DD38B4F00EBC29E /* Sources */,
 				061635231DD38B4F00EBC29E /* Frameworks */,
@@ -205,14 +207,14 @@
 			dependencies = (
 				061635281DD38B4F00EBC29E /* PBXTargetDependency */,
 			);
-			name = "Reimburse Final PojectTests";
+			name = "Reimburse Final ProjectTests";
 			productName = "Reimburse Final PojectTests";
-			productReference = 061635261DD38B4F00EBC29E /* Reimburse Final PojectTests.xctest */;
+			productReference = 061635261DD38B4F00EBC29E /* Reimburse Final Project.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		061635301DD38B5000EBC29E /* Reimburse Final PojectUITests */ = {
+		061635301DD38B5000EBC29E /* Reimburse Final ProjectUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 061635401DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final PojectUITests" */;
+			buildConfigurationList = 061635401DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final ProjectUITests" */;
 			buildPhases = (
 				0616352D1DD38B5000EBC29E /* Sources */,
 				0616352E1DD38B5000EBC29E /* Frameworks */,
@@ -223,9 +225,9 @@
 			dependencies = (
 				061635331DD38B5000EBC29E /* PBXTargetDependency */,
 			);
-			name = "Reimburse Final PojectUITests";
+			name = "Reimburse Final ProjectUITests";
 			productName = "Reimburse Final PojectUITests";
-			productReference = 061635311DD38B5000EBC29E /* Reimburse Final PojectUITests.xctest */;
+			productReference = 061635311DD38B5000EBC29E /* Reimburse Final Project.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -251,7 +253,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0616350D1DD38B4F00EBC29E /* Build configuration list for PBXProject "Reimburse Final Poject" */;
+			buildConfigurationList = 0616350D1DD38B4F00EBC29E /* Build configuration list for PBXProject "Reimburse Final Project" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -264,9 +266,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				061635111DD38B4F00EBC29E /* Reimburse Final Poject */,
-				061635251DD38B4F00EBC29E /* Reimburse Final PojectTests */,
-				061635301DD38B5000EBC29E /* Reimburse Final PojectUITests */,
+				061635111DD38B4F00EBC29E /* Reimburse Final Project */,
+				061635251DD38B4F00EBC29E /* Reimburse Final ProjectTests */,
+				061635301DD38B5000EBC29E /* Reimburse Final ProjectUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -334,12 +336,12 @@
 /* Begin PBXTargetDependency section */
 		061635281DD38B4F00EBC29E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 061635111DD38B4F00EBC29E /* Reimburse Final Poject */;
+			target = 061635111DD38B4F00EBC29E /* Reimburse Final Project */;
 			targetProxy = 061635271DD38B4F00EBC29E /* PBXContainerItemProxy */;
 		};
 		061635331DD38B5000EBC29E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 061635111DD38B4F00EBC29E /* Reimburse Final Poject */;
+			target = 061635111DD38B4F00EBC29E /* Reimburse Final Project */;
 			targetProxy = 061635321DD38B5000EBC29E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -453,8 +455,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Reimburse Final Poject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-Poject";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-Project";
+				PRODUCT_NAME = "Reimburse Final Project";
 			};
 			name = Debug;
 		};
@@ -464,8 +466,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Reimburse Final Poject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-Poject";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-Project";
+				PRODUCT_NAME = "Reimburse Final Project";
 			};
 			name = Release;
 		};
@@ -476,8 +478,8 @@
 				INFOPLIST_FILE = "Reimburse Final PojectTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reimburse Final Poject.app/Reimburse Final Poject";
+				PRODUCT_NAME = "Reimburse Final Project";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reimburse Final Project.app/Reimburse Final Project";
 			};
 			name = Debug;
 		};
@@ -488,8 +490,8 @@
 				INFOPLIST_FILE = "Reimburse Final PojectTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reimburse Final Poject.app/Reimburse Final Poject";
+				PRODUCT_NAME = "Reimburse Final Project";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reimburse Final Project.app/Reimburse Final Project";
 			};
 			name = Release;
 		};
@@ -499,7 +501,7 @@
 				INFOPLIST_FILE = "Reimburse Final PojectUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Reimburse Final Project";
 				TEST_TARGET_NAME = "Reimburse Final Poject";
 				USES_XCTRUNNER = YES;
 			};
@@ -511,7 +513,7 @@
 				INFOPLIST_FILE = "Reimburse Final PojectUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Reimburse Final Project";
 				TEST_TARGET_NAME = "Reimburse Final Poject";
 				USES_XCTRUNNER = YES;
 			};
@@ -520,7 +522,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0616350D1DD38B4F00EBC29E /* Build configuration list for PBXProject "Reimburse Final Poject" */ = {
+		0616350D1DD38B4F00EBC29E /* Build configuration list for PBXProject "Reimburse Final Project" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				061635381DD38B5000EBC29E /* Debug */,
@@ -529,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0616353A1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final Poject" */ = {
+		0616353A1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final Project" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0616353B1DD38B5000EBC29E /* Debug */,
@@ -538,7 +540,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0616353D1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final PojectTests" */ = {
+		0616353D1DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final ProjectTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0616353E1DD38B5000EBC29E /* Debug */,
@@ -547,7 +549,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		061635401DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final PojectUITests" */ = {
+		061635401DD38B5000EBC29E /* Build configuration list for PBXNativeTarget "Reimburse Final ProjectUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				061635411DD38B5000EBC29E /* Debug */,

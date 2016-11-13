@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "061635111DD38B4F00EBC29E"
-               BuildableName = "Reimburse Final Poject.app"
-               BlueprintName = "Reimburse Final Poject"
-               ReferencedContainer = "container:Reimburse Final Poject.xcodeproj">
+               BuildableName = "Reimburse Final Project.app"
+               BlueprintName = "Reimburse Final Project"
+               ReferencedContainer = "container:Reimburse Final Project.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "061635251DD38B4F00EBC29E"
-               BuildableName = "Reimburse Final PojectTests.xctest"
-               BlueprintName = "Reimburse Final PojectTests"
-               ReferencedContainer = "container:Reimburse Final Poject.xcodeproj">
+               BuildableName = "Reimburse Final Project.xctest"
+               BlueprintName = "Reimburse Final ProjectTests"
+               ReferencedContainer = "container:Reimburse Final Project.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "061635301DD38B5000EBC29E"
-               BuildableName = "Reimburse Final PojectUITests.xctest"
-               BlueprintName = "Reimburse Final PojectUITests"
-               ReferencedContainer = "container:Reimburse Final Poject.xcodeproj">
+               BuildableName = "Reimburse Final Project.xctest"
+               BlueprintName = "Reimburse Final ProjectUITests"
+               ReferencedContainer = "container:Reimburse Final Project.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "061635111DD38B4F00EBC29E"
-            BuildableName = "Reimburse Final Poject.app"
-            BlueprintName = "Reimburse Final Poject"
-            ReferencedContainer = "container:Reimburse Final Poject.xcodeproj">
+            BuildableName = "Reimburse Final Project.app"
+            BlueprintName = "Reimburse Final Project"
+            ReferencedContainer = "container:Reimburse Final Project.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "061635111DD38B4F00EBC29E"
-            BuildableName = "Reimburse Final Poject.app"
-            BlueprintName = "Reimburse Final Poject"
-            ReferencedContainer = "container:Reimburse Final Poject.xcodeproj">
+            BuildableName = "Reimburse Final Project.app"
+            BlueprintName = "Reimburse Final Project"
+            ReferencedContainer = "container:Reimburse Final Project.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "061635111DD38B4F00EBC29E"
-            BuildableName = "Reimburse Final Poject.app"
-            BlueprintName = "Reimburse Final Poject"
-            ReferencedContainer = "container:Reimburse Final Poject.xcodeproj">
+            BuildableName = "Reimburse Final Project.app"
+            BlueprintName = "Reimburse Final Project"
+            ReferencedContainer = "container:Reimburse Final Project.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
