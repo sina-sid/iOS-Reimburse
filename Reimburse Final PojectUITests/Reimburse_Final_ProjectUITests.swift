@@ -1,6 +1,6 @@
 //
-//  Reimburse_Final_PojectUITests.swift
-//  Reimburse Final PojectUITests
+//  Reimburse_Final_ProjectUITests.swift
+//  Reimburse Final ProjectUITests
 //
 //  Created by Sina Siddiqi on 11/9/16.
 //  Copyright © 2016 Sina Siddiqi. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class Reimburse_Final_PojectUITests: XCTestCase {
+class Reimburse_Final_ProjectUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

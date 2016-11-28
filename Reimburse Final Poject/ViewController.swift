@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Reimburse Final Poject
+//  Reimburse Final Project
 //
 //  Created by Sina Siddiqi on 11/9/16.
 //  Copyright © 2016 Sina Siddiqi. All rights reserved.

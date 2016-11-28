@@ -1,6 +1,6 @@
 //
 //  RequestsTableViewController.swift
-//  Reimburse Final Poject
+//  Reimburse Final Project
 //
 //  Created by Gaury Nagaraju on 11/13/16.
 //  Copyright © 2016 Sina Siddiqi. All rights reserved.
