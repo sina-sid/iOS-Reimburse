@@ -1,0 +1,6 @@
+framework module Pods_Reimburse_Final_ProjectUITests {
+  umbrella header "Pods-Reimburse Final ProjectUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
