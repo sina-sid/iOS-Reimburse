@@ -112,12 +112,13 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 // Display Confirmation
                 let msg = "Submitted Request. \nPending Signer Approval"
                 alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                // Segue to Screen: list of reimbursement requests 
                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
             
             case .failure(let error):
                 print(error)
                 // Display Error
-                let msg = "Error while submitting request. Please try again."
+                let msg = "Error while submitting request. \nPlease try again."
                 alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             }

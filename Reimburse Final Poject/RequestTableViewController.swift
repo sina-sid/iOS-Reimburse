@@ -11,10 +11,12 @@ import UIKit
 class RequestTableViewController: UITableViewController {
     
     // MARK: Properties
-    
     let cellIdentifier = "RequestTableViewCell"
-    
     let sampleReq = SampleRequests()
+    
+    @IBAction func newReimbursementRequest(_ sender: Any) {
+        self.performSegue(withIdentifier: "newReimbursementRequest", sender: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
