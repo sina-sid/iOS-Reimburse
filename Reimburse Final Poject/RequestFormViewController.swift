@@ -84,6 +84,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     // MARK: - Validation Delegate Methods
     
     func validationSuccessful() {
+        
         // Submit the form
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.short
@@ -99,13 +100,29 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 "description": purchaseDescription.text!
             ]
         ]
-        Alamofire.request("http://localhost:3000/reimbursements/", method: .post, parameters: parameters)
+        // API Call to submit reimbursement request
+        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Validation Successful")
+                // Display Confirmation
+                let msg = "Submitted Request. \nPending Signer Approval"
+                let alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            
+            case .failure(let error):
+                print(error)
+                // Display Error
+                let msg = "Error while submitting request. Please try again."
+                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
-        // Display Confirmation
-        let alert = UIAlertController(title: "Success", message: "Submitted Request. \nPending Signer Approval", preferredStyle: UIAlertControllerStyle.alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(defaultAction)
-        self.present(alert, animated: true, completion: nil)
     }
     
     func validationFailed(_ errors:[(Validatable ,ValidationError)]) {
