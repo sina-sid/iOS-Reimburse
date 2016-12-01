@@ -7,6 +7,7 @@ target 'Reimburse Final Project' do
 
   # Pods for Reimburse Final Project
   pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
+  pod 'Alamofire', '~> 4.0'
 
   target 'Reimburse Final ProjectTests' do
     inherit! :search_paths

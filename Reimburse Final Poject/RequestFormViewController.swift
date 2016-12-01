@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftValidator
+import Alamofire
 
 class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
     
@@ -83,8 +84,25 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     // MARK: - Validation Delegate Methods
     
     func validationSuccessful() {
-        // submit the form
-        let alert = UIAlertController(title: "Success", message: "Submitted Request. Pending Signer Approval", preferredStyle: UIAlertControllerStyle.alert)
+        // Submit the form
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        let ed = dateFormatter.date(from: eventDate.text!)
+        let parameters: Parameters = [
+            "reimbursement":[
+                "event_date": ed!,
+                "event_name": eventName.text!,
+                "event_location": eventLoc.text!,
+                "num_of_attendees": Int(eventNumOfAttendees.text!)!,
+                "organization": org.text!,
+                "total": Float(total.text!)!,
+                "description": purchaseDescription.text!
+            ]
+        ]
+        Alamofire.request("http://localhost:3000/reimbursements/", method: .post, parameters: parameters)
+        
+        // Display Confirmation
+        let alert = UIAlertController(title: "Success", message: "Submitted Request. \nPending Signer Approval", preferredStyle: UIAlertControllerStyle.alert)
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(defaultAction)
         self.present(alert, animated: true, completion: nil)

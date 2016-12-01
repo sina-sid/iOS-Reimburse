@@ -1,7 +1,9 @@
 PODS:
+  - Alamofire (4.2.0)
   - SwiftValidator (4.0.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.0)
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
 
 EXTERNAL SOURCES:
@@ -15,8 +17,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jpotts18/SwiftValidator.git
 
 SPEC CHECKSUMS:
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
 
-PODFILE CHECKSUM: d5c3c41e6cafe8bb0fc34e48238c2d6e715d88f2
+PODFILE CHECKSUM: a1deef9c77c6fcaa5480a975decbf2c385e8e145
 
 COCOAPODS: 1.1.1
