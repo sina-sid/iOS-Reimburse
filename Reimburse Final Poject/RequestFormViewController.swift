@@ -102,25 +102,27 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         ]
         // API Call to submit reimbursement request
         Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
+            
+            var alert = UIAlertController()
+            var defaultAction = UIAlertAction()
+            
             switch response.result {
             case .success:
                 print("Validation Successful")
                 // Display Confirmation
                 let msg = "Submitted Request. \nPending Signer Approval"
-                let alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
+                alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
             
             case .failure(let error):
                 print(error)
                 // Display Error
                 let msg = "Error while submitting request. Please try again."
-                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alert.addAction(defaultAction)
-                self.present(alert, animated: true, completion: nil)
+                alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             }
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
         }
         
     }
