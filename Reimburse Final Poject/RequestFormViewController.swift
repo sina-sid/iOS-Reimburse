@@ -12,20 +12,63 @@ import Alamofire
 
 class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
     
+    // Values passed from Table View
+    var en: String=""
+    var ed: String=""
+    var el: String=""
+    var noa: String=""
+    var o: String=""
+    var tot: String=""
+    var pd: String="- Where were items purchased? \n- When were they purchased? \n- What was purchased?"
+    var submitButtonIsHidden: Bool=false
+    
     // TO BE FIXED: Get List of Orgs from API.
     var orgs = ["OM", "Emerging Leaders", "Senate", "StuGov Cabinet"]
     
     let validator = Validator()
     
     // MARK: - Properties
-    @IBOutlet weak var eventName: UITextField!
-    @IBOutlet weak var eventDate: UITextField!
-    @IBOutlet weak var eventLoc: UITextField!
-    @IBOutlet weak var eventNumOfAttendees: UITextField!
-    @IBOutlet weak var org: UITextField!
-    @IBOutlet weak var total: UITextField!
-    @IBOutlet weak var purchaseDescription: UITextView!
+    @IBOutlet weak var eventName: UITextField!{
+        didSet{
+            eventName.text = en
+        }
+    }
+    @IBOutlet weak var eventDate: UITextField!{
+        didSet{
+            eventDate.text = ed
+        }
+    }
+    @IBOutlet weak var eventLoc: UITextField!{
+        didSet{
+            eventLoc.text = el
+        }
+    }
+    @IBOutlet weak var eventNumOfAttendees: UITextField!{
+        didSet{
+            eventNumOfAttendees.text = noa
+        }
+    }
+    @IBOutlet weak var org: UITextField!{
+        didSet{
+            org.text = o
+        }
+    }
+    @IBOutlet weak var total: UITextField!{
+        didSet{
+            total.text = tot
+        }
+    }
+    @IBOutlet weak var purchaseDescription: UITextView!{
+        didSet{
+            purchaseDescription.text = pd
+        }
+    }
     
+    @IBOutlet weak var submitRequest: UIButton!{
+        didSet{
+            submitRequest.isHidden = submitButtonIsHidden
+        }
+    }
     @IBAction func submit(_ sender: AnyObject) {
         validator.validate(self)
     }
@@ -34,6 +77,11 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Border for Textfield box
+        purchaseDescription.layer.borderWidth = 1.0
+        purchaseDescription.layer.cornerRadius = 5
+        purchaseDescription.layer.borderColor = UIColor.lightGray.cgColor
         
         // Default Value for Event Date = Today
         let dateFormatter = DateFormatter()

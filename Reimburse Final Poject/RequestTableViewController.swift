@@ -66,6 +66,10 @@ class RequestTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showSubmittedRequest", sender: self)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -102,14 +106,29 @@ class RequestTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // Populate Form with Values if Rquest already submiited
+        if let cell = sender as? UITableViewCell{
+            if segue.identifier == "showSubmittedRequest" {
+                let formView:RequestFormViewController = segue.destination as! RequestFormViewController
+                let index = tableView.indexPath(for: cell)
+                let request = sampleReq.sampleReqs[index!.section][index!.row]
+                formView.en = request.event_name
+                let df = DateFormatter()
+                formView.ed = df.string(from: request.event_date)
+                formView.el = request.event_location
+                formView.noa = String(request.num_of_attendees)
+                formView.o = request.organization
+                formView.tot = String(request.total)
+                formView.pd = request.description
+                formView.submitButtonIsHidden = true
+                
+            }// end of segue if loop
+        }// end of cell if loop
+            
     }
-    */
 
 }

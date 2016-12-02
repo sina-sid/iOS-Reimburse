@@ -136,7 +136,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tIX-AC-Hqh" id="PnZ-Vl-vvL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requester Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9O-LC-dt6">
@@ -159,6 +159,7 @@
                                 <connections>
                                     <outlet property="requester_date" destination="bPk-6q-vVL" id="GMl-KS-7LH"/>
                                     <outlet property="requester_name" destination="R9O-LC-dt6" id="XPN-Bx-hxT"/>
+                                    <segue destination="IWP-nw-ii3" kind="show" identifier="showSubmittedRequest" id="LFW-Df-wsq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -294,12 +295,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="87" id="4nd-Of-RQH"/>
                                 </constraints>
-                                <string key="text">- Where were items purchased?
-
-- When were they purchased?
-
-- What was purchased?
-</string>
                                 <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -408,6 +403,7 @@
                         <outlet property="eventNumOfAttendees" destination="y24-lV-Mkv" id="0g4-c9-DGy"/>
                         <outlet property="org" destination="8in-kn-K5J" id="IFr-tt-AqV"/>
                         <outlet property="purchaseDescription" destination="Qif-M8-2m6" id="cGo-oB-ZcY"/>
+                        <outlet property="submitRequest" destination="QoW-fo-Pbk" id="oSJ-U8-OXl"/>
                         <outlet property="total" destination="QqU-lE-of1" id="TEq-YE-2cC"/>
                         <segue destination="3gt-4C-TGc" kind="show" identifier="successRequestSubmission" id="jDr-cm-Ggq"/>
                     </connections>
@@ -420,4 +416,7 @@
     <resources>
         <image name="tartansLogo" width="175" height="174"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="LFW-Df-wsq"/>
+    </inferredMetricsTieBreakers>
 </document>
