@@ -78,6 +78,9 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
 
         // Do any additional setup after loading the view.
         
+        // Status Bar Appearance
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         // Border for Textfield box
         purchaseDescription.layer.borderWidth = 1.0
         purchaseDescription.layer.cornerRadius = 5
@@ -121,6 +124,13 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
         validator.registerField(total, rules: [RequiredRule(), FloatRule()])
         validator.registerField(purchaseDescription, rules: [RequiredRule()])
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Revert to Default status bar style for other view controllers
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         
     }
 
