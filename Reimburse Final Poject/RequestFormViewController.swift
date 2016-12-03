@@ -28,6 +28,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     let validator = Validator()
     
     // MARK: - Properties
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollContentView: UIView!
     @IBOutlet weak var eventName: UITextField!{
         didSet{
             eventName.text = en
@@ -72,14 +74,31 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     @IBAction func submit(_ sender: AnyObject) {
         validator.validate(self)
     }
+    // Nav Bar Properties
+    @IBOutlet weak var topNavBar: UINavigationItem!
+    @IBOutlet weak var cancelBarButton: UIBarButtonItem!
+    @IBOutlet weak var saveBarButton: UIBarButtonItem!
+    @IBAction func cancel(_ sender: Any) {
+        self.performSegue(withIdentifier: "cancelReimbursementRequest", sender: self)
+    }
     
+    // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
+        // Scroll View
+        view.addSubview(scrollView)
+        
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        // Nav Bar Appearance
+        cancelBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
+        saveBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
+        let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = attrs
         
         // Border for Textfield box
         purchaseDescription.layer.borderWidth = 1.0
@@ -127,11 +146,15 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Revert to Default status bar style for other view controllers
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-        
     }
 
     override func didReceiveMemoryWarning() {
