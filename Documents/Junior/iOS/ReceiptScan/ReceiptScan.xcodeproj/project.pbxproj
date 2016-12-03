@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		33B95D021DEE13BB000EAF4C /* minizip in Resources */ = {isa = PBXBuildFile; fileRef = 33B95D011DEE13BB000EAF4C /* minizip */; };
+		33B95D041DEE15BE000EAF4C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D031DEE15BE000EAF4C /* libz.tbd */; };
+		33B95D5F1DF093F9000EAF4C /* SSZipArchive in Resources */ = {isa = PBXBuildFile; fileRef = 33B95D5E1DF093F9000EAF4C /* SSZipArchive */; };
+		33B95D641DF0943D000EAF4C /* libz.1.1.3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D601DF0943D000EAF4C /* libz.1.1.3.tbd */; };
+		33B95D651DF0943D000EAF4C /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D611DF0943D000EAF4C /* libz.1.2.5.tbd */; };
+		33B95D661DF0943D000EAF4C /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D621DF0943D000EAF4C /* libz.1.2.8.tbd */; };
+		33B95D671DF0943D000EAF4C /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D631DF0943D000EAF4C /* libz.1.tbd */; };
+		92DCEE661DC531C700EAB925 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCEE651DC531C700EAB925 /* AppDelegate.swift */; };
+		92DCEE681DC531C700EAB925 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCEE671DC531C700EAB925 /* ViewController.swift */; };
+		92DCEE6B1DC531C700EAB925 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DCEE691DC531C700EAB925 /* Main.storyboard */; };
+		92DCEE6D1DC531C700EAB925 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92DCEE6C1DC531C700EAB925 /* Assets.xcassets */; };
+		92DCEE701DC531C700EAB925 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92DCEE6E1DC531C700EAB925 /* LaunchScreen.storyboard */; };
+		92DCEE7B1DC531C700EAB925 /* ReceiptScanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCEE7A1DC531C700EAB925 /* ReceiptScanTests.swift */; };
+		92DCEE941DC6764200EAB925 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DCEE931DC6764200EAB925 /* TesseractOCR.framework */; };
+		92DCEE961DC6764900EAB925 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 92DCEE951DC6764900EAB925 /* tessdata */; };
+		92DCEE981DC6765E00EAB925 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DCEE8D1DC673CD00EAB925 /* CoreImage.framework */; };
+		92DCEE991DC6766B00EAB925 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DCEE8B1DC673C100EAB925 /* libstdc++.6.0.9.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		92DCEE771DC531C700EAB925 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92DCEE5A1DC531C700EAB925 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92DCEE611DC531C700EAB925;
+			remoteInfo = ReceiptScan;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		33B95D011DEE13BB000EAF4C /* minizip */ = {isa = PBXFileReference; lastKnownFileType = folder; name = minizip; path = ../ssziparchive/minizip; sourceTree = "<group>"; };
+		33B95D031DEE15BE000EAF4C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		33B95D5E1DF093F9000EAF4C /* SSZipArchive */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SSZipArchive; path = ../ZipArchive/SSZipArchive; sourceTree = "<group>"; };
+		33B95D601DF0943D000EAF4C /* libz.1.1.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.1.3.tbd; path = usr/lib/libz.1.1.3.tbd; sourceTree = SDKROOT; };
+		33B95D611DF0943D000EAF4C /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		33B95D621DF0943D000EAF4C /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		33B95D631DF0943D000EAF4C /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		33B95D681DF0972A000EAF4C /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSZipArchive.h; path = ../BridgeAPI/Carthage/Build/Mac/ZipArchive.framework/Versions/A/Headers/SSZipArchive.h; sourceTree = "<group>"; };
+		92DCEE621DC531C700EAB925 /* ReceiptScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReceiptScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DCEE651DC531C700EAB925 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		92DCEE671DC531C700EAB925 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		92DCEE6A1DC531C700EAB925 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		92DCEE6C1DC531C700EAB925 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92DCEE6F1DC531C700EAB925 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		92DCEE711DC531C700EAB925 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92DCEE761DC531C700EAB925 /* ReceiptScanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReceiptScanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DCEE7A1DC531C700EAB925 /* ReceiptScanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptScanTests.swift; sourceTree = "<group>"; };
+		92DCEE7C1DC531C700EAB925 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92DCEE8B1DC673C100EAB925 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		92DCEE8D1DC673CD00EAB925 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		92DCEE8F1DC674F900EAB925 /* ReceiptScan-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReceiptScan-Bridging-Header.h"; sourceTree = "<group>"; };
+		92DCEE931DC6764200EAB925 /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = "<group>"; };
+		92DCEE951DC6764900EAB925 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		92DCEE9A1DC676D600EAB925 /* FakeObjectiveCClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeObjectiveCClass.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		92DCEE5F1DC531C700EAB925 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33B95D641DF0943D000EAF4C /* libz.1.1.3.tbd in Frameworks */,
+				33B95D651DF0943D000EAF4C /* libz.1.2.5.tbd in Frameworks */,
+				33B95D661DF0943D000EAF4C /* libz.1.2.8.tbd in Frameworks */,
+				33B95D671DF0943D000EAF4C /* libz.1.tbd in Frameworks */,
+				33B95D041DEE15BE000EAF4C /* libz.tbd in Frameworks */,
+				92DCEE991DC6766B00EAB925 /* libstdc++.6.0.9.tbd in Frameworks */,
+				92DCEE981DC6765E00EAB925 /* CoreImage.framework in Frameworks */,
+				92DCEE941DC6764200EAB925 /* TesseractOCR.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DCEE731DC531C700EAB925 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		92DCEE591DC531C700EAB925 = {
+			isa = PBXGroup;
+			children = (
+				33B95D5E1DF093F9000EAF4C /* SSZipArchive */,
+				92DCEE9A1DC676D600EAB925 /* FakeObjectiveCClass.h */,
+				33B95D011DEE13BB000EAF4C /* minizip */,
+				92DCEE641DC531C700EAB925 /* ReceiptScan */,
+				92DCEE791DC531C700EAB925 /* ReceiptScanTests */,
+				92DCEE631DC531C700EAB925 /* Products */,
+				92DCEE8A1DC673C100EAB925 /* Frameworks */,
+				92DCEE8F1DC674F900EAB925 /* ReceiptScan-Bridging-Header.h */,
+				33B95D681DF0972A000EAF4C /* SSZipArchive.h */,
+			);
+			sourceTree = "<group>";
+		};
+		92DCEE631DC531C700EAB925 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92DCEE621DC531C700EAB925 /* ReceiptScan.app */,
+				92DCEE761DC531C700EAB925 /* ReceiptScanTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92DCEE641DC531C700EAB925 /* ReceiptScan */ = {
+			isa = PBXGroup;
+			children = (
+				92DCEE651DC531C700EAB925 /* AppDelegate.swift */,
+				92DCEE671DC531C700EAB925 /* ViewController.swift */,
+				92DCEE691DC531C700EAB925 /* Main.storyboard */,
+				92DCEE6C1DC531C700EAB925 /* Assets.xcassets */,
+				92DCEE6E1DC531C700EAB925 /* LaunchScreen.storyboard */,
+				92DCEE711DC531C700EAB925 /* Info.plist */,
+				92DCEE971DC6765000EAB925 /* Supporting Files */,
+				92DCEE931DC6764200EAB925 /* TesseractOCR.framework */,
+			);
+			path = ReceiptScan;
+			sourceTree = "<group>";
+		};
+		92DCEE791DC531C700EAB925 /* ReceiptScanTests */ = {
+			isa = PBXGroup;
+			children = (
+				92DCEE7A1DC531C700EAB925 /* ReceiptScanTests.swift */,
+				92DCEE7C1DC531C700EAB925 /* Info.plist */,
+			);
+			path = ReceiptScanTests;
+			sourceTree = "<group>";
+		};
+		92DCEE8A1DC673C100EAB925 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33B95D601DF0943D000EAF4C /* libz.1.1.3.tbd */,
+				33B95D611DF0943D000EAF4C /* libz.1.2.5.tbd */,
+				33B95D621DF0943D000EAF4C /* libz.1.2.8.tbd */,
+				33B95D631DF0943D000EAF4C /* libz.1.tbd */,
+				33B95D031DEE15BE000EAF4C /* libz.tbd */,
+				92DCEE8D1DC673CD00EAB925 /* CoreImage.framework */,
+				92DCEE8B1DC673C100EAB925 /* libstdc++.6.0.9.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92DCEE971DC6765000EAB925 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92DCEE951DC6764900EAB925 /* tessdata */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		92DCEE611DC531C700EAB925 /* ReceiptScan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92DCEE7F1DC531C700EAB925 /* Build configuration list for PBXNativeTarget "ReceiptScan" */;
+			buildPhases = (
+				92DCEE5E1DC531C700EAB925 /* Sources */,
+				92DCEE5F1DC531C700EAB925 /* Frameworks */,
+				92DCEE601DC531C700EAB925 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReceiptScan;
+			productName = ReceiptScan;
+			productReference = 92DCEE621DC531C700EAB925 /* ReceiptScan.app */;
+			productType = "com.apple.product-type.application";
+		};
+		92DCEE751DC531C700EAB925 /* ReceiptScanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92DCEE821DC531C700EAB925 /* Build configuration list for PBXNativeTarget "ReceiptScanTests" */;
+			buildPhases = (
+				92DCEE721DC531C700EAB925 /* Sources */,
+				92DCEE731DC531C700EAB925 /* Frameworks */,
+				92DCEE741DC531C700EAB925 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92DCEE781DC531C700EAB925 /* PBXTargetDependency */,
+			);
+			name = ReceiptScanTests;
+			productName = ReceiptScanTests;
+			productReference = 92DCEE761DC531C700EAB925 /* ReceiptScanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		92DCEE5A1DC531C700EAB925 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Gaury Nagaraju";
+				TargetAttributes = {
+					92DCEE611DC531C700EAB925 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = Y34285G567;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
+					};
+					92DCEE751DC531C700EAB925 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 92DCEE611DC531C700EAB925;
+					};
+				};
+			};
+			buildConfigurationList = 92DCEE5D1DC531C700EAB925 /* Build configuration list for PBXProject "ReceiptScan" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 92DCEE591DC531C700EAB925;
+			productRefGroup = 92DCEE631DC531C700EAB925 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92DCEE611DC531C700EAB925 /* ReceiptScan */,
+				92DCEE751DC531C700EAB925 /* ReceiptScanTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92DCEE601DC531C700EAB925 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DCEE701DC531C700EAB925 /* LaunchScreen.storyboard in Resources */,
+				92DCEE961DC6764900EAB925 /* tessdata in Resources */,
+				92DCEE6D1DC531C700EAB925 /* Assets.xcassets in Resources */,
+				92DCEE6B1DC531C700EAB925 /* Main.storyboard in Resources */,
+				33B95D021DEE13BB000EAF4C /* minizip in Resources */,
+				33B95D5F1DF093F9000EAF4C /* SSZipArchive in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DCEE741DC531C700EAB925 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		92DCEE5E1DC531C700EAB925 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DCEE681DC531C700EAB925 /* ViewController.swift in Sources */,
+				92DCEE661DC531C700EAB925 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92DCEE721DC531C700EAB925 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92DCEE7B1DC531C700EAB925 /* ReceiptScanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		92DCEE781DC531C700EAB925 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92DCEE611DC531C700EAB925 /* ReceiptScan */;
+			targetProxy = 92DCEE771DC531C700EAB925 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		92DCEE691DC531C700EAB925 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92DCEE6A1DC531C700EAB925 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		92DCEE6E1DC531C700EAB925 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92DCEE6F1DC531C700EAB925 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		92DCEE7D1DC531C700EAB925 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92DCEE7E1DC531C700EAB925 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		92DCEE801DC531C700EAB925 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Y34285G567;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ReceiptScan",
+				);
+				INFOPLIST_FILE = ReceiptScan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ReceiptScan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ReceiptScan-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		92DCEE811DC531C700EAB925 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = Y34285G567;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ReceiptScan",
+				);
+				INFOPLIST_FILE = ReceiptScan/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-lstdc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ReceiptScan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ReceiptScan-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		92DCEE831DC531C700EAB925 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ReceiptScanTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ReceiptScanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReceiptScan.app/ReceiptScan";
+			};
+			name = Debug;
+		};
+		92DCEE841DC531C700EAB925 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ReceiptScanTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ReceiptScanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReceiptScan.app/ReceiptScan";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92DCEE5D1DC531C700EAB925 /* Build configuration list for PBXProject "ReceiptScan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DCEE7D1DC531C700EAB925 /* Debug */,
+				92DCEE7E1DC531C700EAB925 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92DCEE7F1DC531C700EAB925 /* Build configuration list for PBXNativeTarget "ReceiptScan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DCEE801DC531C700EAB925 /* Debug */,
+				92DCEE811DC531C700EAB925 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92DCEE821DC531C700EAB925 /* Build configuration list for PBXNativeTarget "ReceiptScanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92DCEE831DC531C700EAB925 /* Debug */,
+				92DCEE841DC531C700EAB925 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92DCEE5A1DC531C700EAB925 /* Project object */;
+}
