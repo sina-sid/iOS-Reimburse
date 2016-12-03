@@ -14,6 +14,8 @@ class RequestTableViewController: UITableViewController {
     let cellIdentifier = "RequestTableViewCell"
     let sampleReq = SampleRequests()
     
+    @IBOutlet weak var topNavBar: UINavigationItem!
+    
     @IBAction func newReimbursementRequest(_ sender: Any) {
         self.performSegue(withIdentifier: "newReimbursementRequest", sender: self)
     }
@@ -29,6 +31,10 @@ class RequestTableViewController: UITableViewController {
         
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        // Nav Bar Appearance
+        let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = attrs
     }
 
     override func didReceiveMemoryWarning() {

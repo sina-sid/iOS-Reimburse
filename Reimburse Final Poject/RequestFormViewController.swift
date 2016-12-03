@@ -78,6 +78,9 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     @IBOutlet weak var topNavBar: UINavigationItem!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
+    @IBAction func cancel(_ sender: Any) {
+        self.performSegue(withIdentifier: "cancelReimbursementRequest", sender: self)
+    }
     
     // MARK: View Functions
     override func viewDidLoad() {
@@ -152,7 +155,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         super.viewWillDisappear(animated)
         // Revert to Default status bar style for other view controllers
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-        
     }
 
     override func didReceiveMemoryWarning() {
