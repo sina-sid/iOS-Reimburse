@@ -402,17 +402,17 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="REIMBURSEMENT REQUEST" id="9rO-91-uVc">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="Zlm-sA-lVx">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="JEN-EX-NWo">
                             <connections>
-                                <action selector="cancel:" destination="IWP-nw-ii3" id="MNa-pq-0aY"/>
-                                <segue destination="6p6-cA-RZe" kind="show" identifier="cancelReimbursementRequest" id="bSK-Kg-QQF"/>
+                                <action selector="cancel:" destination="IWP-nw-ii3" id="iIq-N7-Qlg"/>
+                                <segue destination="6p6-cA-RZe" kind="show" identifier="cancelReimbursementRequest" action="showDetailViewController:sender:" id="VTb-wb-02r"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="E5c-hX-aBY"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="plain" id="E5c-hX-aBY"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="cancelBarButton" destination="Zlm-sA-lVx" id="IJp-tA-gQM"/>
+                        <outlet property="cancelBarButton" destination="JEN-EX-NWo" id="Lwa-uI-yeF"/>
                         <outlet property="eventDate" destination="JtV-l5-GDX" id="ByY-Fq-OAk"/>
                         <outlet property="eventLoc" destination="det-gw-6nx" id="7gR-AN-BVd"/>
                         <outlet property="eventName" destination="7Uw-jW-ExG" id="7vC-Zp-uC5"/>
@@ -473,7 +473,7 @@
         <image name="tartansLogo" width="175" height="174"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bSK-Kg-QQF"/>
-        <segue reference="LFW-Df-wsq"/>
+        <segue reference="VTb-wb-02r"/>
+        <segue reference="FKD-qY-9vx"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,9 +25,23 @@ class RequestTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // Load Requests Data from API
+        sampleReq.loadRequestsForUser{ (isLoading, error) in
+            if isLoading == false{
+                self.tableView.reloadData()
+            }
+            else{
+                print("Error: ", error)
+                // Display Alert
+                let msg = "Error Loading App. \nPlease Reload App"
+                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                // Segue to Screen: list of reimbursement requests
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .lightContent
@@ -68,10 +82,8 @@ class RequestTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.requester_name.text = req.requester.first_name + " " + req.requester.last_name
-        if let reqDate = req.request_date{
-            let df = DateFormatter()
-            cell.requester_date.text = df.string(from: reqDate)
-        }
+        let df = DateFormatter()
+        cell.requester_date.text = df.string(from: req.request_date)
 
         return cell
     }
@@ -122,7 +134,8 @@ class RequestTableViewController: UITableViewController {
         // Populate Form with Values if Rquest already submiited
         if let cell = sender as? UITableViewCell{
             if segue.identifier == "showSubmittedRequest" {
-                let formView:RequestFormViewController = segue.destination as! RequestFormViewController
+                let navController = segue.destination as! UINavigationController
+                let formView:RequestFormViewController = navController.topViewController as! RequestFormViewController
                 let index = tableView.indexPath(for: cell)
                 let request = sampleReq.sampleReqs[index!.section][index!.row]
                 formView.en = request.event_name
@@ -133,7 +146,10 @@ class RequestTableViewController: UITableViewController {
                 formView.o = request.organization
                 formView.tot = String(request.total)
                 formView.pd = request.description
+                formView.disableFieldEditing = true
                 formView.submitButtonIsHidden = true
+                formView.saveBarButtonIsEnabled = false
+                formView.cancelBarButtonIsHidden = true
                 
             }// end of segue if loop
         }// end of cell if loop

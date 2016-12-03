@@ -20,7 +20,10 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     var o: String=""
     var tot: String=""
     var pd: String="- Where were items purchased? \n- When were they purchased? \n- What was purchased?"
+    var disableFieldEditing: Bool=false
     var submitButtonIsHidden: Bool=false
+    var saveBarButtonIsEnabled: Bool=true
+    var cancelBarButtonIsHidden: Bool=false
     
     // TO BE FIXED: Get List of Orgs from API.
     var orgs = ["OM", "Emerging Leaders", "Senate", "StuGov Cabinet"]
@@ -33,36 +36,57 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     @IBOutlet weak var eventName: UITextField!{
         didSet{
             eventName.text = en
+            if disableFieldEditing{
+                eventName.isEnabled = false
+            }
         }
     }
     @IBOutlet weak var eventDate: UITextField!{
         didSet{
             eventDate.text = ed
+            if disableFieldEditing{
+                eventDate.isEnabled = false
+            }
         }
     }
     @IBOutlet weak var eventLoc: UITextField!{
         didSet{
             eventLoc.text = el
+            if disableFieldEditing{
+                eventLoc.isEnabled = false
+            }
         }
     }
     @IBOutlet weak var eventNumOfAttendees: UITextField!{
         didSet{
             eventNumOfAttendees.text = noa
+            if disableFieldEditing{
+                eventNumOfAttendees.isEnabled = false
+            }
         }
     }
     @IBOutlet weak var org: UITextField!{
         didSet{
             org.text = o
+            if disableFieldEditing{
+                org.isEnabled = false
+            }
         }
     }
     @IBOutlet weak var total: UITextField!{
         didSet{
             total.text = tot
+            if disableFieldEditing{
+                total.isEnabled = false
+            }
         }
     }
     @IBOutlet weak var purchaseDescription: UITextView!{
         didSet{
             purchaseDescription.text = pd
+            if disableFieldEditing{
+                purchaseDescription.isEditable = false
+            }
         }
     }
     
@@ -99,6 +123,16 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         saveBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
         let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
         self.navigationController?.navigationBar.titleTextAttributes = attrs
+        
+        // Nav Bar Buttons
+        saveBarButton.isEnabled = saveBarButtonIsEnabled
+        if !saveBarButtonIsEnabled{
+            saveBarButton.title=""
+        }
+        if cancelBarButtonIsHidden{
+            cancelBarButton.title="Back"
+        }
+        
         
         // Border for Textfield box
         purchaseDescription.layer.borderWidth = 1.0
@@ -178,7 +212,9 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 "num_of_attendees": Int(eventNumOfAttendees.text!)!,
                 "organization": org.text!,
                 "total": Float(total.text!)!,
-                "description": purchaseDescription.text!
+                "description": purchaseDescription.text!,
+                "request_date": Date(),
+                "requester_id": 1 // TO BE FIXED: Use current_user ID
             ]
         ]
         // API Call to submit reimbursement request
