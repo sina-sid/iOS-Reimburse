@@ -27,7 +27,7 @@ class SampleRequests{
     // MARK: Load Requests for User
     func loadRequestsForUser(completionHandler: @escaping (Bool?, NSError?) -> ()){
         var isLoading = true
-        // TO BE FIXED: Test User
+        // TO BE FIXED: Use Current User instead of Test User
         let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234, org_roles: ["Scotch n Soda":"Member", "Mayur SASA":"Signer"])
         // API Call to get reimbursement requests
         Alamofire.request("http://localhost:3000/reimbursements/", method: .get).validate().responseJSON { response in

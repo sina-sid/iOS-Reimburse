@@ -150,6 +150,11 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         dateFormatter.dateStyle = DateFormatter.Style.short
         let nowString = dateFormatter.string(from: Date())
         eventDate.text = nowString
+        // DatePicker for Event Date
+        let datePickerView = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePickerMode.date
+        eventDate.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(RequestFormViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
         
         // Dropdown For Orgs
         let pickerView = UIPickerView()
@@ -178,7 +183,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         // Validations
         validator.registerField(eventName, rules: [RequiredRule()])
         validator.registerField(eventLoc, rules: [RequiredRule()])
-        validator.registerField(eventDate, rules: [RequiredRule(), EventDateRule()])
+        // validator.registerField(eventDate, rules: [RequiredRule(), EventDateRule()])
+        validator.registerField(eventDate, rules: [RequiredRule()])
         validator.registerField(eventNumOfAttendees, rules: [RequiredRule(), NumericRule()])
         validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
         validator.registerField(total, rules: [RequiredRule(), FloatRule()])
@@ -200,6 +206,14 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Update Event Date in View when date picker value changes
+    func datePickerValueChanged(sender:UIDatePicker){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        // let nowString = dateFormatter.string(from: Date())
+        eventDate.text = dateFormatter.string(from: sender.date)
     }
     
     // MARK: - Validation Delegate Methods
@@ -304,7 +318,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
 
 // MARK: - Custom Validation Rules
 class EventDateRule: Rule {
-    
+    // NOTE: THIS RULE ISN'T CURRENTLY USED SINCE EVENT DATE CAN BE IN FUTURE. DATE FORMAT IS ENSURED USING DATE PICKER
     private var message:String
     
     init(message:String="Enter Valid Date On or Before Today"){
