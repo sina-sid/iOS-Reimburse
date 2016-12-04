@@ -228,7 +228,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         loadingIndicator.isHidden = false
         
         // API Call to submit reimbursement request
-        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
+        Alamofire.request("http://localhost:3000/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
             
             var alert = UIAlertController()
             var defaultAction = UIAlertAction()
