@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6p6-cA-RZe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -51,6 +51,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIt-1z-BLr">
                                         <rect key="frame" x="165" y="143" width="45" height="30"/>
                                         <state key="normal" title="LOGIN"/>
+                                        <connections>
+                                            <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5No-ZQ-8FH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwA-Aa-DUf">
                                         <rect key="frame" x="152" y="250" width="70" height="30"/>
@@ -96,13 +99,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="andrewID" destination="XmO-tV-lZ9" id="Cci-8H-M8g"/>
                         <outlet property="appBody" destination="Xyv-iq-lJl" id="eJo-Sz-jyj"/>
+                        <outlet property="loginButton" destination="zIt-1z-BLr" id="oJ5-vZ-s4C"/>
+                        <outlet property="password" destination="7aF-yh-0Kb" id="phj-2B-sPx"/>
                         <outlet property="tartanFooter" destination="YYW-9I-IpT" id="7Ok-Rr-D02"/>
+                        <segue destination="6p6-cA-RZe" kind="show" identifier="successLogin" id="xn4-CB-CgT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="350" y="431"/>
+            <point key="canvasLocation" x="350" y="439"/>
         </scene>
         <!--REQUEST LISTS-->
         <scene sceneID="pnu-iI-Ool">
@@ -298,6 +305,10 @@
                                                     <action selector="submit:" destination="IWP-nw-ii3" eventType="touchUpInside" id="HDy-Cb-KUR"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-eM-E2b">
+                                                <rect key="frame" x="177" y="253" width="20" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -417,6 +428,7 @@
                         <outlet property="eventLoc" destination="det-gw-6nx" id="7gR-AN-BVd"/>
                         <outlet property="eventName" destination="7Uw-jW-ExG" id="7vC-Zp-uC5"/>
                         <outlet property="eventNumOfAttendees" destination="y24-lV-Mkv" id="0g4-c9-DGy"/>
+                        <outlet property="loadingIndicator" destination="YZF-eM-E2b" id="5St-nr-4Ac"/>
                         <outlet property="org" destination="8in-kn-K5J" id="IFr-tt-AqV"/>
                         <outlet property="purchaseDescription" destination="Qif-M8-2m6" id="cGo-oB-ZcY"/>
                         <outlet property="saveBarButton" destination="E5c-hX-aBY" id="HVK-1C-ePR"/>
@@ -473,7 +485,7 @@
         <image name="tartansLogo" width="175" height="174"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VTb-wb-02r"/>
+        <segue reference="xn4-CB-CgT"/>
         <segue reference="FKD-qY-9vx"/>
     </inferredMetricsTieBreakers>
 </document>

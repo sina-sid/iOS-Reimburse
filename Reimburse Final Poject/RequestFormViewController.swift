@@ -89,6 +89,12 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             }
         }
     }
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!{
+        didSet{
+            loadingIndicator.stopAnimating()
+            loadingIndicator.isHidden = true
+        }
+    }
     
     @IBOutlet weak var submitRequest: UIButton!{
         didSet{
@@ -217,11 +223,19 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 "requester_id": 1 // TO BE FIXED: Use current_user ID
             ]
         ]
+        // Display Activity Indicator
+        loadingIndicator.startAnimating()
+        loadingIndicator.isHidden = false
+        
         // API Call to submit reimbursement request
         Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
             
             var alert = UIAlertController()
             var defaultAction = UIAlertAction()
+            
+            // Do Not Display Activity Indicator
+            self.loadingIndicator.stopAnimating()
+            self.loadingIndicator.isHidden = true
             
             switch response.result {
             case .success:

@@ -30,7 +30,7 @@ class SampleRequests{
         // TO BE FIXED: Test User
         let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234, org_roles: ["Scotch n Soda":"Member", "Mayur SASA":"Signer"])
         // API Call to get reimbursement requests
-        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .get).validate().responseJSON { response in
+        Alamofire.request("http://localhost:3000/reimbursements/", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 print("Validation Successful")
