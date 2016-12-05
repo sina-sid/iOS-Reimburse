@@ -41,6 +41,14 @@
                                     <action selector="zipImageWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gvf-ws-DLD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dei-2c-e6g">
+                                <rect key="frame" x="156" y="459" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send Zip"/>
+                                <connections>
+                                    <action selector="sendEmailButtonTappedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pXU-xm-VUP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

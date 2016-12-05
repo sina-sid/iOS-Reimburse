@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Zip
+import MessageUI
 
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SSZipArchiveDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var receiptImage: UIImageView!
     
     var imagePicker: UIImagePickerController!
+    var data: NSData?
     
     // Take Image of Receipt
     @IBAction func takePhoto(_ sender: Any) {
@@ -47,11 +50,28 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 //                
 //            }
         
-            let img = #imageLiteral(resourceName: "stuff")
-            let ddURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileURL = ddURL.appendingPathComponent("trial.jpg")
-            let data = UIImageJPEGRepresentation(img, 1.0)
-            try! data?.write(to: fileURL)
+          //    let img = #imageLiteral(resourceName: "stuff")
+//            let ddURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+//            let fileURL = ddURL.appendingPathComponent("trial.jpg")
+//            let data = UIImageJPEGRepresentation(img, 1.0)
+//         //   try! data?.write(to: fileURL) {
+//
+//      //  }
+       // "/Users/rumbywilson/Desktop/pepe"
+        
+        var urlPaths = [URL]()
+        let path = "file:///Users/rumbywilson/Desktop/pepe.png"
+        //print(path)
+        let url = URL(string: path)
+        urlPaths.append(url!)
+        do {
+            let z = try Zip.quickZipFiles(urlPaths, fileName: "TEST")
+            print("PASSED")
+            print(z)
+        } catch {
+            print("ERROR")
+        }
+
 
         
 //        if let image = receiptImage.image {
@@ -60,11 +80,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 //                try? data.write(to: filename)
 //            }
 //        }
-        SSZipArchive.createZipFile(atPath: "/Users/rumbywilson/Desktop/ZIPPED", withContentsOfDirectory: fileURL.path )
-        print ("done bitch")
+ 
+    
     }
     
-    
+        
     // Implement imagePickerController Delegate Method
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
