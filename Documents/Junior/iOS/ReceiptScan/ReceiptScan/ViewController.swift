@@ -71,20 +71,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         } catch {
             print("ERROR")
         }
-
-
-        
-//        if let image = receiptImage.image {
-//            if let data = UIImageJPEGRepresentation(image, 0.8) {
-//                let filename = getDocumentsDirectory().appendingPathComponent("zipMe.png")
-//                try? data.write(to: filename)
-//            }
-//        }
  
     
     }
     
-        
+    
     // Implement imagePickerController Delegate Method
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
