@@ -48,7 +48,7 @@ class RequestTableViewController: UITableViewController {
         }
         
         // Status Bar Appearance
-        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = .lightContent
         
         // Nav Bar Appearance
         let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
@@ -70,7 +70,13 @@ class RequestTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return sampleReq.sampleReqs[section].count
+        let numOfRows = sampleReq.sampleReqs[section].count
+        if numOfRows < 1{
+            return 1 // To display msg indicating no requests in given section
+        }
+        else{
+            return numOfRows
+        }
     }
     
     // Configure Section Header for Table View
@@ -81,14 +87,21 @@ class RequestTableViewController: UITableViewController {
     // Configure Table Cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let req = sampleReq.sampleReqs[indexPath.section][indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RequestTableViewCell
-
-        // Configure the cell...
-        cell.requester_name.text = req.requester.first_name + " " + req.requester.last_name
-        let df = DateFormatter()
-        cell.requester_date.text = df.string(from: req.request_date)
+        
+        // If no requests for given section
+        let requestsForSection = sampleReq.sampleReqs[indexPath.section].count
+        if requestsForSection < 1{
+            cell.event_name.text = "No requests at the moment."
+            cell.event_name.adjustsFontSizeToFitWidth = true
+            cell.total.text = ""
+        }
+        else{
+            let req = sampleReq.sampleReqs[indexPath.section][indexPath.row]
+            // Configure the cell...
+            cell.event_name.text = req.event_name
+            cell.total.text = String(req.total)
+        }
 
         return cell
     }

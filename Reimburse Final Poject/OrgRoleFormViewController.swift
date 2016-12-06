@@ -17,7 +17,7 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
     
     // Nav Bar Button Actions
     @IBAction func cancel(_ sender: Any) {
-        self.performSegue(withIdentifier: "cancelNewOrgRole", sender: self)
+        self.performSegue(withIdentifier: "showOrgRoleList", sender: self)
     }
     @IBAction func submit(_ sender: Any) {
         // Get Parameters
@@ -78,6 +78,7 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
         let rolePickerView = UIPickerView()
         rolePickerView.tag = 1
         rolePickerView.delegate = self
+        rolePickerView.selectRow(0, inComponent: 0, animated: true)
         role.inputView = rolePickerView
     }
 

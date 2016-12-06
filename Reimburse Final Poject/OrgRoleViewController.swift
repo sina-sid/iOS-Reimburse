@@ -23,8 +23,19 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     @IBAction func newUserOrg(_ sender: Any) {
         self.performSegue(withIdentifier: "orgRoleSegue", sender: self)
     }
-    @IBAction func cancel(_ sender: Any) {
-        self.performSegue(withIdentifier: "cancelSettingsList", sender: self)
+    @IBAction func done(_ sender: Any) {
+        // Allow Transition to View Requests List only after selecting atleast one org.
+        if orgRoles.count < 1{
+            // Display Alert
+            let msg = "Please Select atleast one organization."
+            let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            self.performSegue(withIdentifier: "cancelSettingsList", sender: self)
+        }
     }
 
     override func viewDidLoad() {
@@ -94,20 +105,30 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return orgRoles.count
+        if orgRoles.count < 1{
+            return 1
+        }
+        else{
+            return orgRoles.count
+        }
     }
     
     // Configure Table Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let orgRole = orgRoles[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrgRoleTableViewCell
-        
-        // Configure the cell...
-        cell.org.text = orgRole.org
-        cell.role.text = orgRole.role
-        
+        // No Existing Org Roles
+        if orgRoles.count < 1{
+            cell.textLabel?.text = "No Organizations listed. Please Add One."
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
+            cell.detailTextLabel?.text = ""
+        }
+        else{
+            // Configure the cell with Org Role
+            let orgRole = orgRoles[indexPath.row]
+            cell.org.text = orgRole.org
+            cell.role.text = orgRole.role
+        }
         return cell
     }
     

@@ -2,9 +2,6 @@
 //  ViewController.swift
 //  Reimburse Final Project
 //
-//  Created by Sina Siddiqi on 11/9/16.
-//  Copyright © 2016 Sina Siddiqi. All rights reserved.
-//
 
 import UIKit
 import Alamofire
@@ -37,6 +34,8 @@ class ViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             case .success:
                 print("Successful Request")
+                // Set Current User
+                
                 // Show Requests List
                 self.performSegue(withIdentifier: "successLogin", sender: self)
             }
@@ -48,11 +47,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .default
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        // Status Bar Appearance
-        UIApplication.shared.statusBarStyle = .lightContent
     }
 
     override func didReceiveMemoryWarning() {

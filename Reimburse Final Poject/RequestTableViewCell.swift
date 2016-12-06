@@ -11,8 +11,8 @@ import UIKit
 class RequestTableViewCell: UITableViewCell {
     
     // MARK: Properties
-    @IBOutlet weak var requester_date: UILabel!
-    @IBOutlet weak var requester_name: UILabel!
+    @IBOutlet weak var event_name: UILabel!
+    @IBOutlet weak var total: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
