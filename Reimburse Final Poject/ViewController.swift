@@ -49,6 +49,11 @@ class ViewController: UIViewController {
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .default
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        // Status Bar Appearance
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
