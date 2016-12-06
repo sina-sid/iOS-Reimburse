@@ -197,8 +197,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         // Revert to Default status bar style for other view controllers
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
     }
@@ -301,6 +301,12 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         org.text = orgs[row]
+    }
+    
+    // Resign TextField as First Responder
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
     
 

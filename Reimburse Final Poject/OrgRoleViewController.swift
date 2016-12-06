@@ -14,11 +14,19 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var userListTable: UITableView!
     @IBOutlet weak var tartanFooter: UIImageView!
     let cellIdentifier = "OrgRoleTableViewCell"
+    
+    @IBAction func newUserOrg(_ sender: Any) {
+        self.performSegue(withIdentifier: "orgRoleSegue", sender: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Status Bar Appearance
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         // Setup Table
         userListTable.dataSource = self
     }
@@ -54,8 +62,6 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-
-    
 
     /*
     // MARK: - Navigation

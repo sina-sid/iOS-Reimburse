@@ -49,18 +49,7 @@ class RequestTableViewController: UITableViewController {
         // Nav Bar Appearance
         let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
         self.navigationController?.navigationBar.titleTextAttributes = attrs
-        
-//        // Configure Table Title
-//        let tableTitle = UIView()
-//        let label = UILabel(frame: CGRect(x: self.tableView.frame.origin.x, y: self.tableView.frame.origin.y+20.0, width: self.tableView.frame.width, height: 10.0))
-//        label.text = "Welcome Jane!"
-//        tableTitle.addSubview(label)
-//        self.tableView.tableHeaderView = tableTitle
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        // Status Bar Appearance
-        UIApplication.shared.statusBarStyle = .lightContent
+
     }
 
     override func didReceiveMemoryWarning() {

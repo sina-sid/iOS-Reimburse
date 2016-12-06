@@ -36,7 +36,7 @@ class ViewController: UIViewController {
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
             case .success:
-                print("Validation Successful")
+                print("Successful Request")
                 // Show Requests List
                 self.performSegue(withIdentifier: "successLogin", sender: self)
             }
@@ -66,6 +66,13 @@ class ViewController: UIViewController {
         setRoundedCornersOfBody()
     }
     
+    // Resign TextField as First Responder
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        super.touchesBegan(touches, with: event)
+    }
+    
+    // Set Rounded Ends of Footer
     func setRoundedCornersOfBody(){
         let rectShape = CAShapeLayer()
         rectShape.bounds = self.appBody.bounds
