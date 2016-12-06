@@ -16,6 +16,11 @@ class RequestTableViewController: UITableViewController {
     
     @IBOutlet weak var topNavBar: UINavigationItem!
     
+    // Show Settings Scene: Org + Role
+    @IBAction func indexSettings(_ sender: Any) {
+        self.performSegue(withIdentifier: "showSettingsList", sender: self)
+    }
+    // Create New Reimbursement Request
     @IBAction func newReimbursementRequest(_ sender: Any) {
         self.performSegue(withIdentifier: "newReimbursementRequest", sender: self)
     }
@@ -36,7 +41,6 @@ class RequestTableViewController: UITableViewController {
                 // Display Alert
                 let msg = "Error Loading App. \nPlease Reload App"
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                // Segue to Screen: list of reimbursement requests
                 let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)

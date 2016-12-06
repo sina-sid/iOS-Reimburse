@@ -15,6 +15,10 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
     @IBOutlet weak var org: UITextField!
     @IBOutlet weak var role: UITextField!
     
+    // Nav Bar Button Actions
+    @IBAction func cancel(_ sender: Any) {
+        self.performSegue(withIdentifier: "cancelNewOrgRole", sender: self)
+    }
     @IBAction func submit(_ sender: Any) {
         // Get Parameters
         let dateFormatter = DateFormatter()
@@ -39,6 +43,7 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
                 print("Successful Request")
                 // Reload Table
                 // Segue to Screen: list of orgs & roles
+                self.performSegue(withIdentifier: "showOrgRoleList", sender: self)
                 
             case .failure(let error):
                 print(error)

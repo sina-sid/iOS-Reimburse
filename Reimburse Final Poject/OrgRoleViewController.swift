@@ -7,16 +7,24 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class OrgRoleViewController: UIViewController, UITableViewDataSource {
     
     // MARK: Properties
     @IBOutlet weak var userListTable: UITableView!
     @IBOutlet weak var tartanFooter: UIImageView!
-    let cellIdentifier = "OrgRoleTableViewCell"
     
+    let cellIdentifier = "OrgRoleTableViewCell"
+    var orgRoles = [OrgRole]()
+    
+    // Nav Bar Button Actions
     @IBAction func newUserOrg(_ sender: Any) {
         self.performSegue(withIdentifier: "orgRoleSegue", sender: self)
+    }
+    @IBAction func cancel(_ sender: Any) {
+        self.performSegue(withIdentifier: "cancelSettingsList", sender: self)
     }
 
     override func viewDidLoad() {
@@ -29,6 +37,48 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         
         // Setup Table
         userListTable.dataSource = self
+        loadOrgRoles{ (isLoading, error) in
+            if isLoading == false{
+                self.userListTable.reloadData()
+            }
+            else{
+                print("Error: ", error)
+                // Display Alert
+                let msg = "Error Loading App. \nPlease Reload App"
+                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
+        var isLoading = true
+        // TO BE FIXED: Use Current User instead of Test User
+        let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234, org_roles: ["Scotch n Soda":"Member", "Mayur SASA":"Signer"])
+        // API Call to get org roles
+        Alamofire.request("http://localhost:3000/user_orgs/", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                print("Validation Successful")
+                let json = JSON(value)
+                // Loop through requests
+                for (key,subJson):(String, JSON) in json {
+                    // Create Request Object
+                    let userOrg = OrgRole(org: subJson["organization"].stringValue, role: subJson["role"].stringValue, user: testUser)
+                    // Append to Requests Array
+                    self.orgRoles += [userOrg]
+                }
+                // Loading is complete
+                isLoading = false
+                completionHandler(isLoading, nil)
+            case .failure(let error):
+                print(error)
+                isLoading = true
+                completionHandler(isLoading, error as NSError?)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,17 +94,19 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return orgRoles.count
     }
     
     // Configure Table Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let orgRole = orgRoles[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrgRoleTableViewCell
         
         // Configure the cell...
-        cell.org.text = "OM"
-        cell.role.text = "Member"
+        cell.org.text = orgRole.org
+        cell.role.text = orgRole.role
         
         return cell
     }
