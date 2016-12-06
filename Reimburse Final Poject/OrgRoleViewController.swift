@@ -58,7 +58,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         // TO BE FIXED: Use Current User instead of Test User
         let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234, org_roles: ["Scotch n Soda":"Member", "Mayur SASA":"Signer"])
         // API Call to get org roles
-        Alamofire.request("http://localhost:3000/user_orgs/", method: .get).validate().responseJSON { response in
+        Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 print("Validation Successful")

@@ -25,7 +25,7 @@ class ViewController: UIViewController {
             "password": password.text ?? ""
         ]
         // API Call to authenticate user
-        Alamofire.request("http://localhost:3000/login", method: .get, parameters: parameters).validate().responseJSON { response in
+        Alamofire.request("https://reimbursementapi.herokuapp.com/login", method: .get, parameters: parameters).validate().responseJSON { response in
             switch response.result {
             case .failure(let error):
                 print("Error")

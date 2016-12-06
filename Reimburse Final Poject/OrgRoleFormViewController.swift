@@ -36,7 +36,7 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
             ]
         ]
         // API Call to create new UserOrg
-        Alamofire.request("http://localhost:3000/user_orgs/", method: .post, parameters: parameters).validate().responseJSON { response in
+        Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .post, parameters: parameters).validate().responseJSON { response in
             
             switch response.result {
             case .success:
