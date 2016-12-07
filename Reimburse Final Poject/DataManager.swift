@@ -56,10 +56,10 @@ class DataManager {
     }
     
     
-    // MARK: - Saving & Loading Data
+    // MARK: - Saving, Loading & Clearing Data
     
     /**
-     Saves contact data to a plist.
+     Saves user data to a plist.
      */
     
     func saveUser() {
@@ -71,7 +71,7 @@ class DataManager {
     }
     
     /**
-     Loads the data from a plist into contacts array.
+     Loads the data from a plist as user.
      */
     
     func loadUser() {
@@ -83,6 +83,33 @@ class DataManager {
                 print("User in loadUser: ", self.user)
                 unarchiver.finishDecoding()
             } else {
+                print("\nFILE NOT FOUND AT: \(path)")
+            }
+        }
+    }
+    
+    /**
+     Clear user data from a plist.
+     */
+    func clearUserInfo(){
+        user.first_name=""
+        user.last_name=""
+        user.andrewID = ""
+        user.email=""
+        user.smc = 0000
+        saveUser()
+    }
+    func destroyUser() {
+        let path = dataFilePath()
+        if FileManager.default.fileExists(atPath: path) {
+            if let data = NSMutableDictionary(contentsOfFile: path){
+                // TO BE FIXED: DOESN"T WORK CURRENTLY
+                data.removeObject(forKey: "User")
+                // Save Changes to Plist
+                print("Data: ", data)
+                data.write(toFile: path, atomically: true)
+            }
+            else{
                 print("\nFILE NOT FOUND AT: \(path)")
             }
         }

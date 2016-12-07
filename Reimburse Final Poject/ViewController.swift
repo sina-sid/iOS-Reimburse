@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var andrewID: UITextField!
     
+    // Nav BAr Actions
     @IBOutlet weak var loginButton: UIButton!
     @IBAction func login(_ sender: Any) {
         // Submit Form to login user

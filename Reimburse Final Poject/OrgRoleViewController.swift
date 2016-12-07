@@ -16,10 +16,49 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var userListTable: UITableView!
     @IBOutlet weak var tartanFooter: UIImageView!
     
+    let dataManager = DataManager()
     let cellIdentifier = "OrgRoleTableViewCell"
     var orgRoles = [OrgRole]()
     
     // Nav Bar Button Actions
+    @IBAction func logout(_ sender: Any) {
+        // API Call to Logout
+        logoutCurrentUser{ (isLoading, error) in
+            if isLoading == false{
+                // Delete Info From Plist If Saved
+                // self.dataManager.destroyUser()
+                self.dataManager.clearUserInfo()
+                // Segue to Login View Controller
+                self.performSegue(withIdentifier: "logoutSegue", sender: self)
+            }
+            else{
+                print("Error: ", error)
+                // Display Alert
+                let msg = "Couldn't Log Out. \nPlease Try Again."
+                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    func logoutCurrentUser(completionHandler: @escaping (Bool?, NSError?) -> ()){
+        var isLoading = true 
+        // API Call to logout
+        Alamofire.request("https://reimbursementapi.herokuapp.com/logout/", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                print("Logout Successful")
+                // Loading is complete
+                isLoading = false
+                completionHandler(isLoading, nil)
+            case .failure(let error):
+                print(error)
+                isLoading = true
+                completionHandler(isLoading, error as NSError?)
+            }
+        }
+    }
     @IBAction func newUserOrg(_ sender: Any) {
         self.performSegue(withIdentifier: "orgRoleSegue", sender: self)
     }
