@@ -50,7 +50,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 //                
 //            }
         
-          //    let img = #imageLiteral(resourceName: "stuff")
+        //let img = #imageLiteral(resourceName: "stuff")
+//        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("test.jpg")
+//        
+//        do {
+//            try jpegData.write(to: fileURL, options: .atomic)
+//        } catch {
+//            print(error)
+//        }
 //            let ddURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 //            let fileURL = ddURL.appendingPathComponent("trial.jpg")
 //            let data = UIImageJPEGRepresentation(img, 1.0)
@@ -58,14 +65,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 //
 //      //  }
        // "/Users/rumbywilson/Desktop/pepe"
+        let image = receiptImage.image!
+        guard let imageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("TempImage.png") else {
+            return
+        }
+        do {
+            try UIImagePNGRepresentation(image)?.write(to: imageURL)
+        } catch { }
         
         var urlPaths = [URL]()
-        let path = "file:///Users/rumbywilson/Desktop/pepe.png"
-        //print(path)
-        let url = URL(string: path)
-        urlPaths.append(url!)
+       // let path = "file:///Users/rumbywilson/Desktop/pepe.png"
+        //let url = URL(string: path)
+        urlPaths.append(imageURL)
         do {
-            let z = try Zip.quickZipFiles(urlPaths, fileName: "TEST")
+            let z = try Zip.quickZipFiles(urlPaths, fileName: "TEST1")
             print("PASSED")
             print(z)
         } catch {
