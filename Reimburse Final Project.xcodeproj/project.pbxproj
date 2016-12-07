@@ -23,6 +23,7 @@
 		921FDF901DF6418B0061A178 /* OrgRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FDF8F1DF6418B0061A178 /* OrgRoleViewController.swift */; };
 		921FDF921DF665FE0061A178 /* OrgRoleFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FDF911DF665FE0061A178 /* OrgRoleFormViewController.swift */; };
 		924401FC1DF738B9005EFCB6 /* OrgRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924401FB1DF738B9005EFCB6 /* OrgRole.swift */; };
+		924401FE1DF790D4005EFCB6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924401FD1DF790D4005EFCB6 /* DataManager.swift */; };
 		929D6D6A1DE3899E007A285F /* RequestFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929D6D691DE3899E007A285F /* RequestFormViewController.swift */; };
 		92E285BD1DD8BFA500B87D0B /* RequestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E285BC1DD8BFA500B87D0B /* RequestTableViewController.swift */; };
 		92E285BF1DD8BFF400B87D0B /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E285BE1DD8BFF400B87D0B /* RequestTableViewCell.swift */; };
@@ -73,6 +74,7 @@
 		921FDF8F1DF6418B0061A178 /* OrgRoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgRoleViewController.swift; sourceTree = "<group>"; };
 		921FDF911DF665FE0061A178 /* OrgRoleFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgRoleFormViewController.swift; sourceTree = "<group>"; };
 		924401FB1DF738B9005EFCB6 /* OrgRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgRole.swift; sourceTree = "<group>"; };
+		924401FD1DF790D4005EFCB6 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		929D6D691DE3899E007A285F /* RequestFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestFormViewController.swift; sourceTree = "<group>"; };
 		92E285BC1DD8BFA500B87D0B /* RequestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTableViewController.swift; sourceTree = "<group>"; };
 		92E285BE1DD8BFF400B87D0B /* RequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				92E285C61DD8FBB600B87D0B /* SampleRequests.swift */,
 				92E285C41DD8EAA000B87D0B /* User.swift */,
 				924401FB1DF738B9005EFCB6 /* OrgRole.swift */,
+				924401FD1DF790D4005EFCB6 /* DataManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				061635181DD38B4F00EBC29E /* ViewController.swift in Sources */,
 				061635161DD38B4F00EBC29E /* AppDelegate.swift in Sources */,
 				929D6D6A1DE3899E007A285F /* RequestFormViewController.swift in Sources */,
+				924401FE1DF790D4005EFCB6 /* DataManager.swift in Sources */,
 				92E285C71DD8FBB600B87D0B /* SampleRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

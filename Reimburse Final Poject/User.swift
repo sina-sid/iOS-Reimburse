@@ -8,7 +8,7 @@
 
 import UIKit
 
-class User{
+class User: NSObject, NSCoding{
     
     // MARK: Properties
     var first_name: String
@@ -16,15 +16,32 @@ class User{
     var andrewID: String
     var email: String
     var smc: Int
-    var org_roles = [String:String]()
     
-    init(first_name: String, last_name: String, andrewID: String, email: String, smc:Int, org_roles:[String:String]){
+    init(first_name: String, last_name: String, andrewID: String, email: String, smc:Int){
         self.first_name = first_name
         self.last_name = last_name
         self.andrewID = andrewID
         self.email = email
         self.smc = smc
-        self.org_roles = org_roles
+        super.init()
+    }
+    
+    // MARK: - Encoding
+    required init(coder aDecoder: NSCoder) {
+        self.first_name = aDecoder.decodeObject(forKey: "FirstName") as! String
+        self.last_name = aDecoder.decodeObject(forKey: "LastName") as! String
+        self.andrewID = aDecoder.decodeObject(forKey: "AndrewID") as! String
+        self.email = aDecoder.decodeObject(forKey: "Email") as! String
+        self.smc = Int(aDecoder.decodeInt64(forKey: "SMC"))
+        super.init()
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(first_name, forKey: "FirstName")
+        aCoder.encode(last_name, forKey: "LastName")
+        aCoder.encode(andrewID, forKey: "AndrewID")
+        aCoder.encode(email, forKey: "Email")
+        aCoder.encode(smc, forKey: "SMC")
     }
     
 }

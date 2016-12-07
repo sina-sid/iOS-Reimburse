@@ -46,6 +46,13 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .lightContent
         
+        // Display Info Alert
+        let msg = "Please Select Organizations you are part of"
+        let alert = UIAlertController(title: "Welcome", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(defaultAction)
+        self.present(alert, animated: true, completion: nil)
+        
         // Setup Table
         userListTable.dataSource = self
         loadOrgRoles{ (isLoading, error) in
@@ -53,7 +60,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
                 self.userListTable.reloadData()
             }
             else{
-                print("Error: ", error)
+                print("Error: ", error!)
                 // Display Alert
                 let msg = "Error Loading App. \nPlease Reload App"
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -67,7 +74,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
         var isLoading = true
         // TO BE FIXED: Use Current User instead of Test User
-        let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234, org_roles: ["Scotch n Soda":"Member", "Mayur SASA":"Signer"])
+        let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234)
         // API Call to get org roles
         Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .get).validate().responseJSON { response in
             switch response.result {
@@ -132,7 +139,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 

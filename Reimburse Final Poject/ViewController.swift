@@ -5,8 +5,12 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
+    
+    var currentUser = User(first_name: "", last_name: "", andrewID: "", email: "", smc: 0000)
+    var dataManager = DataManager()
     
     @IBOutlet weak var tartanFooter: UIImageView!
     @IBOutlet weak var appBody: UIView!
@@ -32,9 +36,13 @@ class ViewController: UIViewController {
                 let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)
-            case .success:
+            case .success(let value):
                 print("Successful Request")
+                let json = JSON(value)
+                print("Json: ", json)
                 // Set Current User
+                self.currentUser = User(first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!)
+                // Save to plist
                 
                 // Show Requests List
                 self.performSegue(withIdentifier: "successLogin", sender: self)
@@ -47,6 +55,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .default
+        
+        dataManager.loadUser()
+        print("User in vc: ", self.currentUser)
     }
 
     override func didReceiveMemoryWarning() {

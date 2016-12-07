@@ -659,7 +659,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qzx-9c-w7Y">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6p6-cA-RZe" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="requestsTableNavigationID" automaticallyAdjustsScrollViewInsets="NO" id="6p6-cA-RZe" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pyG-HV-pzz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

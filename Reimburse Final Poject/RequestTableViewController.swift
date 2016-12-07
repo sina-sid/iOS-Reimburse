@@ -100,7 +100,7 @@ class RequestTableViewController: UITableViewController {
             let req = sampleReq.sampleReqs[indexPath.section][indexPath.row]
             // Configure the cell...
             cell.event_name.text = req.event_name
-            cell.total.text = String(req.total)
+            cell.total.text = "$" + String(req.total)
         }
 
         return cell
