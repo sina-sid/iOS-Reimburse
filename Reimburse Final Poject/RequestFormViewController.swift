@@ -196,12 +196,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         super.viewWillLayoutSubviews()
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        // Revert to Default status bar style for other view controllers
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

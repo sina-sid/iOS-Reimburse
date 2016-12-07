@@ -2,9 +2,6 @@
 //  Reimburse_Final_ProjectUITests.swift
 //  Reimburse Final ProjectUITests
 //
-//  Created by Sina Siddiqi on 11/9/16.
-//  Copyright © 2016 Sina Siddiqi. All rights reserved.
-//
 
 import XCTest
 
