@@ -39,32 +39,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     //zip up file
     @IBAction func zipImage (sender: UIButton) {
-//        let zippath = "ZIPIMAGE"
-//        if let image = receiptImage.image {
-////            let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-////            let destinationPath = documentsPath.appendingPathComponent("filename.jpg")
-//            let dPath = "/Users/rumbywilson/Desktop/zipImage.jpg"
-//            let url = NSURL(string: dPath)
-//           let b =  UIImageJPEGRepresentation(image, 1.0)
-//            try b?.write(to: url as! URL) {
-//                
-//            }
-        
-        //let img = #imageLiteral(resourceName: "stuff")
-//        let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("test.jpg")
-//        
-//        do {
-//            try jpegData.write(to: fileURL, options: .atomic)
-//        } catch {
-//            print(error)
-//        }
-//            let ddURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-//            let fileURL = ddURL.appendingPathComponent("trial.jpg")
-//            let data = UIImageJPEGRepresentation(img, 1.0)
-//         //   try! data?.write(to: fileURL) {
-//
-//      //  }
-       // "/Users/rumbywilson/Desktop/pepe"
+        // turn image into URL
         let image = receiptImage.image!
         guard let imageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("TempImage.png") else {
             return
@@ -72,20 +47,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         do {
             try UIImagePNGRepresentation(image)?.write(to: imageURL)
         } catch { }
-        
+        // addURL to url paths
         var urlPaths = [URL]()
-       // let path = "file:///Users/rumbywilson/Desktop/pepe.png"
-        //let url = URL(string: path)
         urlPaths.append(imageURL)
         do {
-            let z = try Zip.quickZipFiles(urlPaths, fileName: "TEST1")
+            let z = try Zip.quickZipFiles(urlPaths, fileName: "ZippedFile")
+            // Take this out after adding in tests
             print("PASSED")
-            print(z)
         } catch {
             print("ERROR")
         }
- 
-    
     }
     
     
