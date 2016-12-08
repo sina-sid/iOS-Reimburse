@@ -58,7 +58,6 @@ class ViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         
         dataManager.loadUser()
-        print("User in vc: ", self.currentUser)
     }
 
     override func didReceiveMemoryWarning() {

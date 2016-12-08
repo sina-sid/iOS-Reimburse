@@ -38,7 +38,6 @@ class DataManager {
     
     init() {
         loadUser()
-        print("User in init: ", user)
         print("Documents folder is \(documentsDirectory())\n")
         print("Data file path is \(dataFilePath())")
     }
@@ -80,7 +79,6 @@ class DataManager {
             if let data = NSData(contentsOfFile: path) {
                 let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data)
                 self.user = unarchiver.decodeObject(forKey: "User") as! User
-                print("User in loadUser: ", self.user)
                 unarchiver.finishDecoding()
             } else {
                 print("\nFILE NOT FOUND AT: \(path)")
@@ -106,7 +104,6 @@ class DataManager {
                 // TO BE FIXED: DOESN"T WORK CURRENTLY
                 data.removeObject(forKey: "User")
                 // Save Changes to Plist
-                print("Data: ", data)
                 data.write(toFile: path, atomically: true)
             }
             else{
@@ -114,4 +111,5 @@ class DataManager {
             }
         }
     }
+    
 }

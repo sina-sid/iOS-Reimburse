@@ -9,10 +9,11 @@
 import UIKit
 import SwiftValidator
 import Alamofire
+import SwiftyJSON
 
-class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
+class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
     
-    // Values passed from Table View
+    // Values passed from Table View: indicate if text field has pre-set value and if editing is enabled or not
     var en: String=""
     var ed: String=""
     var el: String=""
@@ -25,9 +26,10 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     var saveBarButtonIsEnabled: Bool=true
     var cancelBarButtonIsHidden: Bool=false
     
-    // TO BE FIXED: Get List of Orgs from API.
-    var orgs = ["OM", "Emerging Leaders", "Senate", "StuGov Cabinet"]
+    // Load from API Call
+    var orgs: Array<String>=[]
     
+    // Swift In-Form Validator - External Framework
     let validator = Validator()
     
     // MARK: - Properties
@@ -139,7 +141,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             cancelBarButton.title="Back"
         }
         
-        
         // Border for Textfield box
         purchaseDescription.layer.borderWidth = 1.0
         purchaseDescription.layer.cornerRadius = 5
@@ -157,9 +158,25 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         datePickerView.addTarget(self, action: #selector(RequestFormViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
         
         // Dropdown For Orgs
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        org.inputView = pickerView
+        
+        loadOrgRoles{ (isLoading, error) in
+            if isLoading == false{
+                let pickerView = UIPickerView()
+                pickerView.delegate = self
+                pickerView.dataSource = self
+                pickerView.reloadAllComponents()
+                self.org.inputView = pickerView
+            }
+            else{
+                print("Error: ", error!)
+                // Display Alert
+                let msg = "No Orgs found. Please go to Settings to list Orgs you are part of."
+                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
         // Validated Fields Display: Red or Green
         validator.styleTransformers(success:{ (validationRule) -> Void in
@@ -200,6 +217,32 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
+        var isLoading = true
+        // API Call to get org roles
+        Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                print("Validation Successful")
+                let json = JSON(value)
+                // Loop through requests
+                for (key,subJson):(String, JSON) in json {
+                    // Create Request Object
+                    let userOrg = OrgRole(org: subJson["organization"].stringValue, role: subJson["role"].stringValue)
+                    // Append to Requests Array
+                    self.orgs += [userOrg.org]
+                }
+                // Loading is complete
+                isLoading = false
+                completionHandler(isLoading, nil)
+            case .failure(let error):
+                print(error)
+                isLoading = true
+                completionHandler(isLoading, error as NSError?)
+            }
+        }
     }
     
     // Update Event Date in View when date picker value changes
@@ -281,7 +324,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     }
     
     // MARK: - PickerView Delegate Methods
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     

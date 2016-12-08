@@ -86,7 +86,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         UIApplication.shared.statusBarStyle = .lightContent
         
         // Display Info Alert
-        let msg = "Please Select Organizations you are part of"
+        let msg = "Add Org and Click Done to Start a Request"
         let alert = UIAlertController(title: "Welcome", message: msg, preferredStyle: UIAlertControllerStyle.alert)
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(defaultAction)
@@ -112,8 +112,6 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
     
     func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
         var isLoading = true
-        // TO BE FIXED: Use Current User instead of Test User
-        let testUser = User(first_name: "TestF", last_name: "TestL", andrewID: "test", email: "test@andrew.cmu.edu", smc: 1234)
         // API Call to get org roles
         Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .get).validate().responseJSON { response in
             switch response.result {
@@ -123,7 +121,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
                 // Loop through requests
                 for (key,subJson):(String, JSON) in json {
                     // Create Request Object
-                    let userOrg = OrgRole(org: subJson["organization"].stringValue, role: subJson["role"].stringValue, user: testUser)
+                    let userOrg = OrgRole(org: subJson["organization"].stringValue, role: subJson["role"].stringValue)
                     // Append to Requests Array
                     self.orgRoles += [userOrg]
                 }
@@ -168,6 +166,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
             cell.textLabel?.text = "No Organizations listed. Please Add One."
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.text = ""
+            cell.isUserInteractionEnabled = false
         }
         else{
             // Configure the cell with Org Role
