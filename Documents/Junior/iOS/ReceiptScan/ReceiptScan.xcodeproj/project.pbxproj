@@ -10,7 +10,6 @@
 		1A960D4E66AC9CEDC7E13B85 /* Pods_ReceiptScan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BBB1DFF6C83C1CBD93D79B2 /* Pods_ReceiptScan.framework */; };
 		33B95D781DF490A7000EAF4C /* Pods_ReceiptScan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D771DF490A7000EAF4C /* Pods_ReceiptScan.framework */; };
 		33B95D791DF49488000EAF4C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B95D031DEE15BE000EAF4C /* libz.tbd */; };
-		33B95D7B1DF5FD74000EAF4C /* Image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33B95D7A1DF5FD74000EAF4C /* Image1.jpg */; };
 		5133002CF17511A5E2ED2CFB /* Pods_ReceiptScanTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7A37F5134F7417309E395B /* Pods_ReceiptScanTests.framework */; };
 		92DCEE661DC531C700EAB925 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCEE651DC531C700EAB925 /* AppDelegate.swift */; };
 		92DCEE681DC531C700EAB925 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCEE671DC531C700EAB925 /* ViewController.swift */; };
@@ -42,7 +41,6 @@
 		33B95D621DF0943D000EAF4C /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		33B95D631DF0943D000EAF4C /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		33B95D771DF490A7000EAF4C /* Pods_ReceiptScan.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_ReceiptScan.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ReceiptScan-cqkejoeupbpdxsewvmjgmnammiod/Build/Products/Debug-iphonesimulator/Pods_ReceiptScan.framework"; sourceTree = "<group>"; };
-		33B95D7A1DF5FD74000EAF4C /* Image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Image1.jpg; path = ../../Zip/examples/Sample/Sample/Image1.jpg; sourceTree = "<group>"; };
 		4BBB1DFF6C83C1CBD93D79B2 /* Pods_ReceiptScan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReceiptScan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DCEE621DC531C700EAB925 /* ReceiptScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReceiptScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92DCEE651DC531C700EAB925 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 			children = (
 				92DCEE651DC531C700EAB925 /* AppDelegate.swift */,
 				92DCEE671DC531C700EAB925 /* ViewController.swift */,
-				33B95D7A1DF5FD74000EAF4C /* Image1.jpg */,
 				92DCEE691DC531C700EAB925 /* Main.storyboard */,
 				92DCEE6C1DC531C700EAB925 /* Assets.xcassets */,
 				92DCEE6E1DC531C700EAB925 /* LaunchScreen.storyboard */,
@@ -263,7 +260,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33B95D7B1DF5FD74000EAF4C /* Image1.jpg in Resources */,
 				92DCEE701DC531C700EAB925 /* LaunchScreen.storyboard in Resources */,
 				92DCEE961DC6764900EAB925 /* tessdata in Resources */,
 				92DCEE6D1DC531C700EAB925 /* Assets.xcassets in Resources */,

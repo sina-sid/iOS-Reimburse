@@ -8,22 +8,23 @@
 
 import UIKit
 import Zip
-import MessageUI
 
+// After we have a working app to show tmrw I will go through and add unit tests
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var receiptImage: UIImageView!
+    @IBOutlet weak var receiptName: UITextField!
     
     var imagePicker: UIImagePickerController!
     var data: NSData?
+    // Document
+    var documentsDirectoryURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     
     // Take Image of Receipt
     @IBAction func takePhoto(_ sender: Any) {
-        print("Hit")
         imagePicker =  UIImagePickerController()
         imagePicker.delegate = self
-        
         // Check if camera source type is available and set source type for image
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             print("Camera available")
@@ -35,33 +36,67 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         }
         
         present(imagePicker, animated: true, completion: nil)
+        
+    }
+    //Save image to document directory
+    @IBAction func saveImage (sender: UIButton) {
+        // get a name for your image
+        let randomNum = arc4random()
+        let name = "image" + String(randomNum)
+        print (name)
+        // get image that was taken
+        let image = receiptImage.image!
+        // create fileURL to add to documents directory
+        let fileURL = documentsDirectoryURL.appendingPathComponent(name)
+        // turn image into a file and write it to the file URL, so that it saves to the document directory
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                try UIImagePNGRepresentation(image)!.write(to: fileURL)
+                print("FILE URL")
+                print(fileURL)
+                print("Image Added Successfully")
+            } catch {
+                print("THE ERROR")
+                print(error)
+            }
+        } else {
+            print("Image Not Added")
+        }
     }
     
     //zip up file
     @IBAction func zipImage (sender: UIButton) {
-        // turn image into URL
-        let image = receiptImage.image!
-        guard let imageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("TempImage.png") else {
-            return
-        }
-        do {
-            try UIImagePNGRepresentation(image)?.write(to: imageURL)
-        } catch { }
-        // addURL to url paths
+        // URL Paths -- everything in here is going to be zipped up
         var urlPaths = [URL]()
-        urlPaths.append(imageURL)
+        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // adding to urlpaths
         do {
-            let z = try Zip.quickZipFiles(urlPaths, fileName: "ZippedFile")
+            // Document directory content( can't use documentsDirectoryURL for this)
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
+            // Filter the directory to capture images (images are not saved with an extension)
+            let imgFiles = directoryContents.filter{ $0.pathExtension == ""}
+            print("img urls:",imgFiles)
+            imgFiles.map{urlPaths.append($0)}
+            print(urlPaths)
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        // Attempting to zip it
+        do {
+            _ = try Zip.quickZipFiles(urlPaths, fileName: "ZIPPEDFILE")
             // Take this out after adding in tests
             print("PASSED")
         } catch {
             print("ERROR")
         }
+        // When implmenting email feature make sure to grab the zipped file from the document directory
+        // After the file is zipped and emailed off,clear the doucment directory to avoid having images repeated
     }
     
     
     // Implement imagePickerController Delegate Method
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         receiptImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         receiptImage.contentMode = .scaleAspectFit
