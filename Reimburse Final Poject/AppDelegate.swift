@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     
     func saveData() {
-//        let navigationController = window!.rootViewController as! UINavigationController
-//        let controller = navigationController.viewControllers[0] as! ViewController
-        
         let controller = window!.rootViewController as! ViewController
         dataManager.user = controller.currentUser
         dataManager.saveUser()
@@ -30,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func restoreData() {
         dataManager.loadUser()
-//        let navigationController = window!.rootViewController as! UINavigationController
-//        let controller = navigationController.viewControllers[0] as! ContactsController
         let controller = window!.rootViewController as! ViewController
         if !dataManager.user.andrewID.isEmpty {
             controller.currentUser = dataManager.user

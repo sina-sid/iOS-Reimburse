@@ -166,18 +166,18 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ny6-ac-DzN">
                             <connections>
                                 <action selector="newReimbursementRequest:" destination="3gt-4C-TGc" id="rsf-fv-s9o"/>
-                                <segue destination="mBv-7r-Ab1" kind="show" identifier="newReimbursementRequest" id="FKD-qY-9vx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="topNavBar" destination="PFe-My-Pqc" id="jfj-SH-cGr"/>
                         <segue destination="IBh-BP-GUq" kind="show" identifier="showSettingsList" id="KdS-Fs-miK"/>
+                        <segue destination="5JS-4B-B04" kind="show" identifier="newReimbursementRequest" id="gs5-9E-lat"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAu-3Y-0az" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5383.1999999999998" y="455.62218890554726"/>
+            <point key="canvasLocation" x="5386" y="457"/>
         </scene>
         <!--REIMBURSEMENT REQUEST-->
         <scene sceneID="46i-MH-9wL">
@@ -449,7 +449,7 @@
         <!--Settings-->
         <scene sceneID="9xo-WX-qcC">
             <objects>
-                <viewController id="fBY-gV-yIy" customClass="OrgRoleViewController" customModule="Reimburse_Final_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="orgRoleList" id="fBY-gV-yIy" customClass="OrgRoleViewController" customModule="Reimburse_Final_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I4f-yB-Q3n"/>
                         <viewControllerLayoutGuide type="bottom" id="S9i-C9-dS6"/>
@@ -459,7 +459,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tartansLogo" translatesAutoresizingMaskIntoConstraints="NO" id="sJm-R7-q4F">
-                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="401" width="375" height="222"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="1" yellow="0.79000000000000004" black="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-Ty-6RH">
@@ -470,18 +470,18 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MXp-c5-78M" id="cFn-AU-AlD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Organization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GSf-ws-8cD">
-                                                    <rect key="frame" x="15" y="12" width="97.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="11" width="98" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Role" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="176-2k-FiN">
-                                                    <rect key="frame" x="326.5" y="12" width="33.5" height="20.5"/>
+                                                    <rect key="frame" x="326" y="11" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -556,7 +556,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tartansLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zeU-ze-Ben">
-                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="401" width="375" height="222"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="1" yellow="0.79000000000000004" black="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGw-Pg-xTY">
@@ -701,6 +701,70 @@
             </objects>
             <point key="canvasLocation" x="6269.6000000000004" y="456.52173913043481"/>
         </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="YUc-Jl-3HH">
+            <objects>
+                <viewController id="tfe-RW-2Jg" customClass="PhotoViewController" customModule="Reimburse_Final_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oJ6-XQ-rzY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zzv-kb-Naj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bzg-Dg-giE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="tjReceipt" translatesAutoresizingMaskIntoConstraints="NO" id="K9z-ha-mea">
+                                <rect key="frame" x="16" y="138" width="343" height="509"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCb-oO-zJ3">
+                                <rect key="frame" x="111" y="72" width="153" height="30"/>
+                                <state key="normal" title="Take Photo Of Receipt">
+                                    <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="tfe-RW-2Jg" eventType="touchUpInside" id="YIL-pb-KbM"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Example of a good receipt photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncM-sq-lAW">
+                                <rect key="frame" x="67.5" y="112" width="240.5" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zzv-kb-Naj" firstAttribute="top" secondItem="K9z-ha-mea" secondAttribute="bottom" constant="20" id="5b1-Gy-V9B"/>
+                            <constraint firstItem="gCb-oO-zJ3" firstAttribute="centerX" secondItem="bzg-Dg-giE" secondAttribute="centerX" id="6d7-vY-dM1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="K9z-ha-mea" secondAttribute="trailing" id="I6K-vt-Z0A"/>
+                            <constraint firstItem="ncM-sq-lAW" firstAttribute="centerX" secondItem="bzg-Dg-giE" secondAttribute="centerX" id="MJJ-kx-bdP"/>
+                            <constraint firstItem="K9z-ha-mea" firstAttribute="centerX" secondItem="bzg-Dg-giE" secondAttribute="centerX" id="Nc3-kg-8ve"/>
+                            <constraint firstItem="gCb-oO-zJ3" firstAttribute="top" secondItem="oJ6-XQ-rzY" secondAttribute="bottom" constant="8" id="QOg-21-qeY"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="K9z-ha-mea" secondAttribute="leading" id="aFs-yl-1gy"/>
+                            <constraint firstItem="ncM-sq-lAW" firstAttribute="top" secondItem="gCb-oO-zJ3" secondAttribute="bottom" constant="10" id="gEI-3Y-Ovf"/>
+                            <constraint firstItem="K9z-ha-mea" firstAttribute="top" secondItem="ncM-sq-lAW" secondAttribute="bottom" constant="8" id="pai-T6-kQS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="TBi-Vm-y5G">
+                        <barButtonItem key="rightBarButtonItem" title="Next" style="plain" id="RIG-dr-icT">
+                            <connections>
+                                <action selector="enterFormDetails:" destination="tfe-RW-2Jg" id="Nbd-T9-REO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="examplePhotoLabel" destination="ncM-sq-lAW" id="eWl-BM-gOw"/>
+                        <outlet property="nextBarButton" destination="RIG-dr-icT" id="I6z-JY-UhV"/>
+                        <outlet property="receiptImage" destination="K9z-ha-mea" id="fWM-r3-HQd"/>
+                        <outlet property="takePhotoButton" destination="gCb-oO-zJ3" id="5zN-MX-R39"/>
+                        <segue destination="mBv-7r-Ab1" kind="show" identifier="enterRequestDetails" id="fqb-c3-RMN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mUB-QH-Qxk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6654" y="1146"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ggQ-3n-3u1">
             <objects>
@@ -737,13 +801,32 @@
             </objects>
             <point key="canvasLocation" x="4111" y="1116"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Oak-JL-T92">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5JS-4B-B04" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sLS-9I-L0c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tfe-RW-2Jg" kind="relationship" relationship="rootViewController" id="B2X-Hv-981"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M9Q-r3-u6r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5914" y="1146"/>
+        </scene>
     </scenes>
     <resources>
         <image name="tartansLogo" width="175" height="174"/>
+        <image name="tjReceipt" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g6X-Ms-MVs"/>
-        <segue reference="yOi-dl-zj2"/>
         <segue reference="LFW-Df-wsq"/>
+        <segue reference="VTb-wb-02r"/>
+        <segue reference="KdS-Fs-miK"/>
     </inferredMetricsTieBreakers>
 </document>

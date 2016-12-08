@@ -95,6 +95,7 @@ class RequestTableViewController: UITableViewController {
             cell.event_name.text = "No requests at the moment."
             cell.event_name.adjustsFontSizeToFitWidth = true
             cell.total.text = ""
+            cell.isUserInteractionEnabled = false
         }
         else{
             let req = sampleReq.sampleReqs[indexPath.section][indexPath.row]
@@ -156,6 +157,7 @@ class RequestTableViewController: UITableViewController {
                 let formView:RequestFormViewController = navController.topViewController as! RequestFormViewController
                 let index = tableView.indexPath(for: cell)
                 let request = sampleReq.sampleReqs[index!.section][index!.row]
+                // set form info
                 formView.en = request.event_name
                 let df = DateFormatter()
                 formView.ed = df.string(from: request.event_date)
@@ -165,6 +167,7 @@ class RequestTableViewController: UITableViewController {
                 formView.tot = String(request.total)
                 formView.pd = request.description
                 formView.disableFieldEditing = true
+                // set nav bar
                 formView.submitButtonIsHidden = true
                 formView.saveBarButtonIsEnabled = false
                 formView.cancelBarButtonIsHidden = true

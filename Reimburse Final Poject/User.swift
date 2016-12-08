@@ -16,13 +16,15 @@ class User: NSObject, NSCoding{
     var andrewID: String
     var email: String
     var smc: Int
+    var password: String
     
-    init(first_name: String, last_name: String, andrewID: String, email: String, smc:Int){
+    init(first_name: String, last_name: String, andrewID: String, email: String, smc:Int, password:String){
         self.first_name = first_name
         self.last_name = last_name
         self.andrewID = andrewID
         self.email = email
         self.smc = smc
+        self.password = password
         super.init()
     }
     
@@ -33,6 +35,7 @@ class User: NSObject, NSCoding{
         self.andrewID = aDecoder.decodeObject(forKey: "AndrewID") as! String
         self.email = aDecoder.decodeObject(forKey: "Email") as! String
         self.smc = Int(aDecoder.decodeInt64(forKey: "SMC"))
+        self.password = aDecoder.decodeObject(forKey: "Password") as! String
         super.init()
     }
     
@@ -42,6 +45,7 @@ class User: NSObject, NSCoding{
         aCoder.encode(andrewID, forKey: "AndrewID")
         aCoder.encode(email, forKey: "Email")
         aCoder.encode(smc, forKey: "SMC")
+        aCoder.encode(password, forKey: "Password")
     }
     
 }

@@ -15,7 +15,6 @@ class Request{
     // Request Details
     var total: Float
     var description: String
-    var requester: User
     var request_date: Date
     // Event Details
     var event_date: Date
@@ -25,10 +24,9 @@ class Request{
     // Change to org class type
     var organization: String
     
-    init(total: Float, description: String, requester: User, request_date: Date, organization: String, event_date: Date, event_name: String, event_location: String, num_of_attendees: Int){
+    init(total: Float, description: String, request_date: Date, organization: String, event_date: Date, event_name: String, event_location: String, num_of_attendees: Int){
         self.total = total
         self.description = description
-        self.requester = requester
         self.request_date = request_date
         self.organization = organization
         self.event_date = event_date

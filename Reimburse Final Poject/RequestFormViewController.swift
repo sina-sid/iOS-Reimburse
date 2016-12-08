@@ -6,13 +6,24 @@
 //
 //
 
+import Foundation
 import UIKit
 import SwiftValidator
 import Alamofire
+import SwiftyJSON
+import AWSS3
 
 class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
     
-    // Values passed from Table View
+    // Amazon S3 
+    // Initialize the Amazon Cognito credentials provider
+    let S3BucketName = "reimbursementapi"
+    
+    // Zipped File of Receipts Passed from PhotoController
+    var zipReceiptImages: URL!
+    var urlPaths = [URL]()
+    
+    // Values passed from Table View: indicate if text field has pre-set value and if editing is enabled or not
     var en: String=""
     var ed: String=""
     var el: String=""
@@ -25,9 +36,10 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     var saveBarButtonIsEnabled: Bool=true
     var cancelBarButtonIsHidden: Bool=false
     
-    // TO BE FIXED: Get List of Orgs from API.
-    var orgs = ["OM", "Emerging Leaders", "Senate", "StuGov Cabinet"]
+    // Load from API Call
+    var orgs: Array<String>=[]
     
+    // Swift In-Form Validator - External Framework
     let validator = Validator()
     
     // MARK: - Properties
@@ -139,7 +151,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             cancelBarButton.title="Back"
         }
         
-        
         // Border for Textfield box
         purchaseDescription.layer.borderWidth = 1.0
         purchaseDescription.layer.cornerRadius = 5
@@ -157,9 +168,24 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         datePickerView.addTarget(self, action: #selector(RequestFormViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
         
         // Dropdown For Orgs
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        org.inputView = pickerView
+        loadOrgRoles{ (isLoading, error) in
+            if isLoading == false{
+                let pickerView = UIPickerView()
+                pickerView.delegate = self
+                // pickerView.dataSource = self
+                // pickerView.reloadAllComponents()
+                self.org.inputView = pickerView
+            }
+            else{
+                print("Error: ", error!)
+                // Display Alert
+                let msg = "No Orgs found. Please go to Settings to list Orgs you are part of."
+                let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(defaultAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
         
         // Validated Fields Display: Red or Green
         validator.styleTransformers(success:{ (validationRule) -> Void in
@@ -186,9 +212,16 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         // validator.registerField(eventDate, rules: [RequiredRule(), EventDateRule()])
         validator.registerField(eventDate, rules: [RequiredRule()])
         validator.registerField(eventNumOfAttendees, rules: [RequiredRule(), NumericRule()])
-        validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
+        // validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
+        validator.registerField(org, rules: [RequiredRule()])
         validator.registerField(total, rules: [RequiredRule(), FloatRule()])
         validator.registerField(purchaseDescription, rules: [RequiredRule()])
+        
+        // Amazon S3
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.usWest2,
+                                                                identityPoolId:"us-west-2:e848a71f-99d5-44f5-b618-b932f2ea0b22")
+        let configuration = AWSServiceConfiguration(region: .usWest2, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
         
     }
     
@@ -202,6 +235,34 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         // Dispose of any resources that can be recreated.
     }
     
+    func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
+        var isLoading = true
+        // API Call to get org roles
+        Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                print("Validation Successful")
+                let json = JSON(value)
+                // Loop through requests
+                for (key,subJson):(String, JSON) in json {
+                    // Create Request Object
+                    let userOrg = OrgRole(org: subJson["organization"].stringValue, role: subJson["role"].stringValue)
+                    // Append to Requests Array
+                    self.orgs += [userOrg.org]
+                }
+                // TO BE FIXED
+                self.orgs += ["Senate"]
+                // Loading is complete
+                isLoading = false
+                completionHandler(isLoading, nil)
+            case .failure(let error):
+                print(error)
+                isLoading = true
+                completionHandler(isLoading, error as NSError?)
+            }
+        }
+    }
+    
     // Update Event Date in View when date picker value changes
     func datePickerValueChanged(sender:UIDatePicker){
         let dateFormatter = DateFormatter()
@@ -213,57 +274,86 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     // MARK: - Validation Delegate Methods
     
     func validationSuccessful() {
+        var receiptsURL = ""
+        // Submit Receipts 
+        for i in 0..<self.urlPaths.count{
+            // 1. Get Image
+            let img = UIImage(contentsOfFile: self.urlPaths[i].absoluteString)
+            // 2. Prepare Uploader
+            let ext = "png"
+            let uploadRequest = AWSS3TransferManagerUploadRequest()
+            uploadRequest?.body = urlPaths[i]
+            // uploadRequest?.key = ProcessInfo.processInfo.globallyUniqueString + "." + ext
+            print("URL: ", self.urlPaths[i])
+            print("URL LC: ", self.urlPaths[i].lastPathComponent)
+            uploadRequest?.key = self.urlPaths[i].lastPathComponent
+            uploadRequest?.bucket = S3BucketName
+            uploadRequest?.contentType = "image/" + ext
+            // 3. Push Image to Server
+            var s3URL = NSURL()
+            let transferManager = AWSS3TransferManager.default()
+            transferManager?.upload(uploadRequest).continue({(task)->AnyObject! in
+                if let error = task.error{
+                    print ("Upload Failed: ", error)
+                }
+                if let exception = task.exception{
+                    print("Upload failed: ", exception)
+                }
+                if task.result != nil{
+                    let urlStr = "http://s3.amazonaws.com/\(self.S3BucketName)/\(uploadRequest?.key!)"
+                    let escUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                    s3URL = NSURL(string: escUrlStr)!
+                    print("Uploaded to:\n\(s3URL)")
+                    // Append to String of URLs
+                    receiptsURL += s3URL.absoluteString! + ","
+                }
+                else{
+                    print("Unexpected empty result")
+                }
+                return nil
+            })// End of Push Images
+        }// End of For Loop
         
-        // Submit the form
+        // Submit the Reimbursement form
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.short
-        let ed = dateFormatter.date(from: eventDate.text!)
+        let ed = dateFormatter.date(from: self.eventDate.text!)
         let parameters: Parameters = [
             "reimbursement":[
                 "event_date": ed!,
-                "event_name": eventName.text!,
-                "event_location": eventLoc.text!,
-                "num_of_attendees": Int(eventNumOfAttendees.text!)!,
-                "organization": org.text!,
-                "total": Float(total.text!)!,
-                "description": purchaseDescription.text!,
-                "request_date": Date(),
-                "requester_id": 1 // TO BE FIXED: Use current_user ID
+                "event_name": self.eventName.text!,
+                "event_location": self.eventLoc.text!,
+                "num_of_attendees": Int(self.eventNumOfAttendees.text!)!,
+                "organization": self.org.text!,
+                "total": Float(self.total.text!)!,
+                "description": self.purchaseDescription.text!,
+                "receipt_images": receiptsURL
             ]
         ]
-        // Display Activity Indicator
-        loadingIndicator.startAnimating()
-        loadingIndicator.isHidden = false
-        
         // API Call to submit reimbursement request
         Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
             
             var alert = UIAlertController()
             var defaultAction = UIAlertAction()
             
-            // Do Not Display Activity Indicator
-            self.loadingIndicator.stopAnimating()
-            self.loadingIndicator.isHidden = true
-            
             switch response.result {
-            case .success:
-                print("Validation Successful")
+            case .success(let value):
+                print("Request Successful Outer A")
                 // Display Confirmation
                 let msg = "Submitted Request. \nPending Signer Approval"
                 alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                // Segue to Screen: list of reimbursement requests 
+                // Segue to Screen: list of reimbursement requests
                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
-            
             case .failure(let error):
                 print(error)
                 // Display Error
                 let msg = "Error while submitting request. \nPlease try again."
                 alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            }
+            }// End of Outer Switch
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)
-        }
+        }// End of Outer Alamo Request
         
     }
     
@@ -281,7 +371,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     }
     
     // MARK: - PickerView Delegate Methods
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
