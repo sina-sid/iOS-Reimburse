@@ -22,8 +22,27 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
     // MARK: - Properties
     @IBOutlet weak var receiptImage: UIImageView!
     @IBOutlet weak var examplePhotoLabel: UILabel!
+    // Nav Bar Buttons
+    @IBOutlet weak var nextBarButton: UIBarButtonItem!
+    @IBAction func enterFormDetails(_ sender: Any) {
+        // Need to select atleast one image
+        if urlPaths.count<1{
+            // Display Info Alert
+            let msg = "Attach atleast one receipt image"
+            let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            // Zip Images
+            // zipImage()
+            // Perform Segue
+            self.performSegue(withIdentifier: "enterRequestDetails", sender: self)
+        }
+    }
+    // Take Photo Button
     @IBOutlet weak var takePhotoButton: UIButton!
-    
     // Take Image of Receipt
     @IBAction func takePhoto(_ sender: Any) {
         imagePicker =  UIImagePickerController()
@@ -67,7 +86,8 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         updateLabelAfterTakePhoto()
         // Save Image
         saveReceiptPhoto()
-        zipImage()
+        // Add to Folder that needs to be zipped
+        addToZipFolder()
     }
     
     // For Camera
@@ -89,7 +109,7 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Save Receipt Images
+    // MARK: - Save & Zip Receipt Images Methods
     func saveReceiptPhoto(){
         // generate name for image: timestamp + receipt
         let dateFormatter = DateFormatter()
@@ -112,20 +132,26 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         }
     }
     
-    func zipImage(){
+    func addToZipFolder(){
         let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         // adding to urlpaths
         do {
             // Document directory content( can't use documentsDirectoryURL for this)
             let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
+            print("DC: ", directoryContents)
             // Filter the directory to capture images (images are not saved with an extension)
-            let imgFiles = directoryContents.filter{ $0.pathExtension == ""}
+            let imgFiles = directoryContents.filter{ $0.path.contains("Receipt") }
+            print("IF: ", imgFiles)
+            
             // Add relevant image file urls to array
             imgFiles.map{urlPaths.append($0)}
         } catch let error as NSError {
             print("Error in zipImage URL: ", error.localizedDescription)
         }
-        // Attempting to zip it
+    }
+    
+    func zipImage(){
+        // Attempting to zip files
         do {
             // Generate Zip File Name
             let dateFormatter = DateFormatter()
@@ -140,17 +166,20 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         }
     }
     
-
-    
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "enterRequestDetails"{
+            let navController = segue.destination as! UINavigationController
+            let formView:RequestFormViewController = navController.topViewController as! RequestFormViewController
+            // Pass path to zipped images for request submission
+            formView.zipReceiptImages = zipFilePath
+            formView.urlPaths = urlPaths
+            
+        }
     }
-    */
-
+ 
 }

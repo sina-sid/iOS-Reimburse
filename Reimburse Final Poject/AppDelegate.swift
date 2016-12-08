@@ -17,20 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     
     func saveData() {
-//        let controller = window!.rootViewController as! ViewController
-//        dataManager.user = controller.currentUser
-//        dataManager.saveUser()
+        let controller = window!.rootViewController as! ViewController
+        dataManager.user = controller.currentUser
+        dataManager.saveUser()
     }
     
     /**
      Uses the dataManager instance to load user info from a plist and add to the ViewController
      */
     func restoreData() {
-//        dataManager.loadUser()
-//        let controller = window!.rootViewController as! ViewController
-//        if !dataManager.user.andrewID.isEmpty {
-//            controller.currentUser = dataManager.user
-//        }
+        dataManager.loadUser()
+        let controller = window!.rootViewController as! ViewController
+        if !dataManager.user.andrewID.isEmpty {
+            controller.currentUser = dataManager.user
+        }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

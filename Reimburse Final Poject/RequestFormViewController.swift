@@ -11,7 +11,11 @@ import SwiftValidator
 import Alamofire
 import SwiftyJSON
 
-class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate {
+class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
+    
+    // Zipped File of Receipts Passed from PhotoController
+    var zipReceiptImages: URL!
+    var urlPaths = [URL]()
     
     // Values passed from Table View: indicate if text field has pre-set value and if editing is enabled or not
     var en: String=""
@@ -163,8 +167,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             if isLoading == false{
                 let pickerView = UIPickerView()
                 pickerView.delegate = self
-                pickerView.dataSource = self
-                pickerView.reloadAllComponents()
+                // pickerView.dataSource = self
+                // pickerView.reloadAllComponents()
                 self.org.inputView = pickerView
             }
             else{
@@ -203,7 +207,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         // validator.registerField(eventDate, rules: [RequiredRule(), EventDateRule()])
         validator.registerField(eventDate, rules: [RequiredRule()])
         validator.registerField(eventNumOfAttendees, rules: [RequiredRule(), NumericRule()])
-        validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
+        // validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
+        validator.registerField(org, rules: [RequiredRule()])
         validator.registerField(total, rules: [RequiredRule(), FloatRule()])
         validator.registerField(purchaseDescription, rules: [RequiredRule()])
         
@@ -234,6 +239,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                     // Append to Requests Array
                     self.orgs += [userOrg.org]
                 }
+                // TO BE FIXED
+                self.orgs += ["Senate"]
                 // Loading is complete
                 isLoading = false
                 completionHandler(isLoading, nil)
@@ -269,44 +276,68 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 "num_of_attendees": Int(eventNumOfAttendees.text!)!,
                 "organization": org.text!,
                 "total": Float(total.text!)!,
-                "description": purchaseDescription.text!,
-                "request_date": Date(),
-                "requester_id": 1 // TO BE FIXED: Use current_user ID
+                "description": purchaseDescription.text!
             ]
         ]
-        // Display Activity Indicator
-        loadingIndicator.startAnimating()
-        loadingIndicator.isHidden = false
         
         // API Call to submit reimbursement request
-        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
+        Alamofire.request("http://localhost:3000/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
             
             var alert = UIAlertController()
             var defaultAction = UIAlertAction()
             
-            // Do Not Display Activity Indicator
-            self.loadingIndicator.stopAnimating()
-            self.loadingIndicator.isHidden = true
-            
             switch response.result {
-            case .success:
-                print("Validation Successful")
+            case .success(let value):
+                print("Request Successful")
+                // API Call To Submit Request
+                let json = JSON(value)
+                let org_id = json["id"].stringValue.data(using: String.Encoding.utf8)
+                
+                Alamofire.upload(
+                    multipartFormData: { multipartFormData in
+                        multipartFormData.append(org_id!, withName: "organization_id")
+                        for i in 0..<self.urlPaths.count{
+                            let img: UIImage
+                            var imgData = Data()
+                            do{
+                                img = try UIImage(data: NSData(contentsOf: self.urlPaths[i]) as Data)!
+                                imgData = UIImageJPEGRepresentation(img, 0.7)!
+                            }catch{
+                                
+                            }
+                            // let img = UIImage(contentsOfFile: self.urlPaths[i].absoluteString)
+                            
+                            multipartFormData.append(imgData, withName: "receipt_images")
+                        }
+                },
+                    to: "http://localhost:3000/receipts",
+                    encodingCompletion: { encodingResult in
+                        switch encodingResult {
+                        case .success(let upload, _, _):
+                            upload.responseJSON { response in
+                                debugPrint(response)
+                            }
+                        case .failure(let encodingError):
+                            print(encodingError)
+                        }
+                }
+                )
+                
                 // Display Confirmation
                 let msg = "Submitted Request. \nPending Signer Approval"
                 alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                // Segue to Screen: list of reimbursement requests 
+                // Segue to Screen: list of reimbursement requests
                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
-            
             case .failure(let error):
                 print(error)
                 // Display Error
                 let msg = "Error while submitting request. \nPlease try again."
                 alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            }
+            }// End of Outer Switch
             alert.addAction(defaultAction)
             self.present(alert, animated: true, completion: nil)
-        }
+        }// End of Outer Alamo Request
         
     }
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5JS-4B-B04">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -166,18 +166,18 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ny6-ac-DzN">
                             <connections>
                                 <action selector="newReimbursementRequest:" destination="3gt-4C-TGc" id="rsf-fv-s9o"/>
-                                <segue destination="mBv-7r-Ab1" kind="show" identifier="newReimbursementRequest" id="FKD-qY-9vx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="topNavBar" destination="PFe-My-Pqc" id="jfj-SH-cGr"/>
                         <segue destination="IBh-BP-GUq" kind="show" identifier="showSettingsList" id="KdS-Fs-miK"/>
+                        <segue destination="5JS-4B-B04" kind="show" identifier="newReimbursementRequest" id="gs5-9E-lat"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAu-3Y-0az" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5383.1999999999998" y="455.62218890554726"/>
+            <point key="canvasLocation" x="5386" y="457"/>
         </scene>
         <!--REIMBURSEMENT REQUEST-->
         <scene sceneID="46i-MH-9wL">
@@ -459,7 +459,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tartansLogo" translatesAutoresizingMaskIntoConstraints="NO" id="sJm-R7-q4F">
-                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="401" width="375" height="222"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="1" yellow="0.79000000000000004" black="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-Ty-6RH">
@@ -556,7 +556,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tartansLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zeU-ze-Ben">
-                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="401" width="375" height="222"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="1" yellow="0.79000000000000004" black="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGw-Pg-xTY">
@@ -745,12 +745,20 @@
                             <constraint firstItem="K9z-ha-mea" firstAttribute="top" secondItem="ncM-sq-lAW" secondAttribute="bottom" constant="8" id="pai-T6-kQS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="TBi-Vm-y5G"/>
+                    <navigationItem key="navigationItem" id="TBi-Vm-y5G">
+                        <barButtonItem key="rightBarButtonItem" title="Next" style="plain" id="RIG-dr-icT">
+                            <connections>
+                                <action selector="enterFormDetails:" destination="tfe-RW-2Jg" id="Nbd-T9-REO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="examplePhotoLabel" destination="ncM-sq-lAW" id="eWl-BM-gOw"/>
+                        <outlet property="nextBarButton" destination="RIG-dr-icT" id="I6z-JY-UhV"/>
                         <outlet property="receiptImage" destination="K9z-ha-mea" id="fWM-r3-HQd"/>
                         <outlet property="takePhotoButton" destination="gCb-oO-zJ3" id="5zN-MX-R39"/>
+                        <segue destination="mBv-7r-Ab1" kind="show" identifier="enterRequestDetails" id="fqb-c3-RMN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUB-QH-Qxk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -817,8 +825,8 @@
         <image name="tjReceipt" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g6X-Ms-MVs"/>
-        <segue reference="KdS-Fs-miK"/>
         <segue reference="LFW-Df-wsq"/>
+        <segue reference="VTb-wb-02r"/>
+        <segue reference="KdS-Fs-miK"/>
     </inferredMetricsTieBreakers>
 </document>

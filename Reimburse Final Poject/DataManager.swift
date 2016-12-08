@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 // MARK: - String Extension
 
@@ -34,7 +36,7 @@ extension String {
 class DataManager {
     
     // MARK: - General
-    var user = User(first_name: "", last_name: "", andrewID: "", email: "", smc: 0000)
+    var user = User(first_name: "", last_name: "", andrewID: "", email: "", smc: 0000, password: "")
     
     init() {
         loadUser()
@@ -77,12 +79,32 @@ class DataManager {
         let path = dataFilePath()
         if FileManager.default.fileExists(atPath: path) {
             if let data = NSData(contentsOfFile: path) {
+                // Load User
                 let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data)
                 self.user = unarchiver.decodeObject(forKey: "User") as! User
                 unarchiver.finishDecoding()
+                // Re-authenticate user to set current user for session
+                let parameters: Parameters = [
+                    "andrewid": user.andrewID,
+                    "password": user.password
+                ]
+                // API Call to authenticate user
+                Alamofire.request("https://reimbursementapi.herokuapp.com/login", method: .get, parameters: parameters).validate().responseJSON { response in
+                    switch response.result {
+                    case .failure(let error):
+                        // IDEAL CASE: SHOULD NEVER REACH FAILURE CASE
+                        print("Error")
+                    case .success(let value):
+                        print("Successful Request")
+                        let json = JSON(value)
+                        print("Json: ", json)
+                        // Set Current User
+                        self.user = User(first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.user.password)
+                    } // End of AlamoFire Request Result
+                }// End of Alamofire Request
             } else {
                 print("\nFILE NOT FOUND AT: \(path)")
-            }
+            }// End of if/ else loop
         }
     }
     
