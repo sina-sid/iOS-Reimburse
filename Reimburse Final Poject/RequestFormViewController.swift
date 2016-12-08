@@ -6,12 +6,18 @@
 //
 //
 
+import Foundation
 import UIKit
 import SwiftValidator
 import Alamofire
 import SwiftyJSON
+import AWSS3
 
 class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
+    
+    // Amazon S3 
+    // Initialize the Amazon Cognito credentials provider
+    let S3BucketName = "reimbursementapi"
     
     // Zipped File of Receipts Passed from PhotoController
     var zipReceiptImages: URL!
@@ -212,6 +218,12 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         validator.registerField(total, rules: [RequiredRule(), FloatRule()])
         validator.registerField(purchaseDescription, rules: [RequiredRule()])
         
+        // Amazon S3
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.usWest2,
+                                                                identityPoolId:"us-west-2:e848a71f-99d5-44f5-b618-b932f2ea0b22")
+        let configuration = AWSServiceConfiguration(region: .usWest2, credentialsProvider: credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -264,80 +276,80 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     
     func validationSuccessful() {
         
-        // Submit the form
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        let ed = dateFormatter.date(from: eventDate.text!)
-        let parameters: Parameters = [
-            "reimbursement":[
-                "event_date": ed!,
-                "event_name": eventName.text!,
-                "event_location": eventLoc.text!,
-                "num_of_attendees": Int(eventNumOfAttendees.text!)!,
-                "organization": org.text!,
-                "total": Float(total.text!)!,
-                "description": purchaseDescription.text!
-            ]
-        ]
-        
-        // API Call to submit reimbursement request
-        Alamofire.request("http://localhost:3000/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
-            
-            var alert = UIAlertController()
-            var defaultAction = UIAlertAction()
-            
-            switch response.result {
-            case .success(let value):
-                print("Request Successful")
-                // API Call To Submit Request
-                let json = JSON(value)
-                let org_id = json["id"].stringValue.data(using: String.Encoding.utf8)
-                
-                Alamofire.upload(
-                    multipartFormData: { multipartFormData in
-                        multipartFormData.append(org_id!, withName: "organization_id")
-                        for i in 0..<self.urlPaths.count{
-                            let img: UIImage
-                            var imgData = Data()
-                            do{
-                                img = try UIImage(data: NSData(contentsOf: self.urlPaths[i]) as Data)!
-                                imgData = UIImageJPEGRepresentation(img, 0.7)!
-                            }catch{
-                                
-                            }
-                            // let img = UIImage(contentsOfFile: self.urlPaths[i].absoluteString)
-                            
-                            multipartFormData.append(imgData, withName: "receipt_images")
-                        }
-                },
-                    to: "http://localhost:3000/receipts",
-                    encodingCompletion: { encodingResult in
-                        switch encodingResult {
-                        case .success(let upload, _, _):
-                            upload.responseJSON { response in
-                                debugPrint(response)
-                            }
-                        case .failure(let encodingError):
-                            print(encodingError)
-                        }
-                }
-                )
-                
-                // Display Confirmation
-                let msg = "Submitted Request. \nPending Signer Approval"
-                alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                // Segue to Screen: list of reimbursement requests
-                defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
-            case .failure(let error):
-                print(error)
-                // Display Error
-                let msg = "Error while submitting request. \nPlease try again."
-                alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            }// End of Outer Switch
-            alert.addAction(defaultAction)
-            self.present(alert, animated: true, completion: nil)
-        }// End of Outer Alamo Request
+        // Submit Receipts 
+        // 1. Get Image
+        let img = UIImage(contentsOfFile: self.urlPaths[0].absoluteString)
+        // 2. Prepare Uploader
+        let ext = "png"
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        uploadRequest?.body = urlPaths[0]
+        // uploadRequest?.key = ProcessInfo.processInfo.globallyUniqueString + "." + ext
+        print("URL: ", self.urlPaths[0])
+        print("URL LC: ", self.urlPaths[0].lastPathComponent)
+        uploadRequest?.key = self.urlPaths[0].lastPathComponent
+        uploadRequest?.bucket = S3BucketName
+        uploadRequest?.contentType = "image/" + ext
+        // 3. Push Image to Server
+        var s3URL = NSURL()
+        let transferManager = AWSS3TransferManager.default()
+        transferManager?.upload(uploadRequest).continue({(task)->AnyObject! in
+            if let error = task.error{
+                print ("Upload Failed: ", error)
+            }
+            if let exception = task.exception{
+                print("Upload failed: ", exception)
+            }
+            if task.result != nil{
+                let urlStr = "http://s3.amazonaws.com/\(self.S3BucketName)/\(uploadRequest?.key!)"
+                let escUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                s3URL = NSURL(string: escUrlStr)!
+                print("Uploaded to:\n\(s3URL)")
+                // Submit the form
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = DateFormatter.Style.short
+                let ed = dateFormatter.date(from: self.eventDate.text!)
+                let parameters: Parameters = [
+                    "reimbursement":[
+                        "event_date": ed!,
+                        "event_name": self.eventName.text!,
+                        "event_location": self.eventLoc.text!,
+                        "num_of_attendees": Int(self.eventNumOfAttendees.text!)!,
+                        "organization": self.org.text!,
+                        "total": Float(self.total.text!)!,
+                        "description": self.purchaseDescription.text!,
+                        "receipt_images": s3URL.absoluteString
+                    ]
+                ]
+                // API Call to submit reimbursement request
+                Alamofire.request("http://localhost:3000/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
+                    
+                    var alert = UIAlertController()
+                    var defaultAction = UIAlertAction()
+                    
+                    switch response.result {
+                    case .success(let value):
+                        print("Request Successful Outer A")
+                        // Display Confirmation
+                        let msg = "Submitted Request. \nPending Signer Approval"
+                        alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                        // Segue to Screen: list of reimbursement requests
+                        defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
+                    case .failure(let error):
+                        print(error)
+                        // Display Error
+                        let msg = "Error while submitting request. \nPlease try again."
+                        alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                        defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    }// End of Outer Switch
+                    alert.addAction(defaultAction)
+                    self.present(alert, animated: true, completion: nil)
+                }// End of Outer Alamo Request
+            }
+            else{
+                print("Unexpected empty result")
+            }
+            return nil
+        })
         
     }
     

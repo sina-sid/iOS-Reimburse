@@ -85,9 +85,9 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         // Update Label
         updateLabelAfterTakePhoto()
         // Save Image
-        saveReceiptPhoto()
+        // saveReceiptPhoto()
         // Add to Folder that needs to be zipped
-        addToZipFolder()
+        // addToZipFolder()
     }
     
     // For Camera
@@ -103,6 +103,20 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         // Set Image
         receiptImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         receiptImage.contentMode = .scaleAspectFit
+        // Get URL of Image & Add To URL Path
+        let imageURL = info[UIImagePickerControllerReferenceURL] as! NSURL
+        let imageName = imageURL.lastPathComponent
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let currentDir = paths[0]
+        let localPath = currentDir.stringByAppendingPathComponent(aPath: imageName!)
+        let localPathURL = URL(fileURLWithPath: localPath)
+        // Save Image
+        let data = UIImagePNGRepresentation(receiptImage.image!)
+        do{
+            try data?.write(to: localPathURL)
+        }catch{}
+        // Add to urlPath
+        self.urlPaths.append(localPathURL)
         // Post Image Processing
         postImageProcessing()
         print("ReceiptImage: ", receiptImage.image!)

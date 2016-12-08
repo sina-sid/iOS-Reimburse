@@ -10,6 +10,7 @@ target 'Reimburse Final Project' do
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON'
   pod 'Zip', '~> 0.6'
+  pod 'AWSS3', '~> 2.3.3'
 
   target 'Reimburse Final ProjectTests' do
     inherit! :search_paths
