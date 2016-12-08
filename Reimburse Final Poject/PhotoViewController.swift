@@ -13,7 +13,6 @@ import Zip
 class PhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var imagePicker: UIImagePickerController!
-    var zipFilePath: URL!
     // URL Paths -- Images in here is going to be zipped up
     var urlPaths = [URL]()
     // Current Directory
@@ -35,8 +34,6 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
             self.present(alert, animated: true, completion: nil)
         }
         else{
-            // Zip Images
-            // zipImage()
             // Perform Segue
             self.performSegue(withIdentifier: "enterRequestDetails", sender: self)
         }
@@ -84,21 +81,9 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
     func postImageProcessing(){
         // Update Label
         updateLabelAfterTakePhoto()
-        // Save Image
-        // saveReceiptPhoto()
-        // Add to Folder that needs to be zipped
-        // addToZipFolder()
     }
     
-    // For Camera
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        // Set Image
-        receiptImage.image = image
-        // Post Image Processing
-        postImageProcessing()
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    // For Photo Library
+    // For Photo Library & Camera
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // Set Image
         receiptImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -119,66 +104,9 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         self.urlPaths.append(localPathURL)
         // Post Image Processing
         postImageProcessing()
-        print("ReceiptImage: ", receiptImage.image!)
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Save & Zip Receipt Images Methods
-    func saveReceiptPhoto(){
-        // generate name for image: timestamp + receipt
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-        let todayString = dateFormatter.string(from: Date())
-        let name = "Receipt_" + todayString
-        // get image that was taken
-        let image = receiptImage.image!
-        // create fileURL to add to documents directory
-        let fileURL = documentsDirectoryURL.appendingPathComponent(name)
-        // turn image into a file and write it to the file URL, so that it saves to the document directory
-        if !FileManager.default.fileExists(atPath: fileURL.path) {
-            do {
-                try UIImagePNGRepresentation(image)!.write(to: fileURL)
-            } catch {
-                print("THE ERROR in SaveReceiptPhoto: ", error)
-            }
-        } else {
-            print("No Image Provided to Save")
-        }
-    }
-    
-    func addToZipFolder(){
-        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        // adding to urlpaths
-        do {
-            // Document directory content( can't use documentsDirectoryURL for this)
-            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil, options: [])
-            print("DC: ", directoryContents)
-            // Filter the directory to capture images (images are not saved with an extension)
-            let imgFiles = directoryContents.filter{ $0.path.contains("Receipt") }
-            print("IF: ", imgFiles)
-            
-            // Add relevant image file urls to array
-            imgFiles.map{urlPaths.append($0)}
-        } catch let error as NSError {
-            print("Error in zipImage URL: ", error.localizedDescription)
-        }
-    }
-    
-    func zipImage(){
-        // Attempting to zip files
-        do {
-            // Generate Zip File Name
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-            let todayString = dateFormatter.string(from: Date())
-            let zipFileName = "ZippedReceipts_" + todayString
-            // Zip Images
-            zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: zipFileName)
-            print("Zip File PAth: ", zipFilePath)
-        } catch {
-            print("ERROR in zipImage Zip")
-        }
-    }
     
     // MARK: - Navigation
 
@@ -189,8 +117,7 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
         if segue.identifier == "enterRequestDetails"{
             let navController = segue.destination as! UINavigationController
             let formView:RequestFormViewController = navController.topViewController as! RequestFormViewController
-            // Pass path to zipped images for request submission
-            formView.zipReceiptImages = zipFilePath
+            // Pass path to images for request submission
             formView.urlPaths = urlPaths
             
         }
