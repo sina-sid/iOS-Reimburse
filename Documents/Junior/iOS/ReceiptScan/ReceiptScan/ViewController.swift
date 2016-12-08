@@ -42,7 +42,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func saveImage (sender: UIButton) {
         // get a name for your image
         let randomNum = arc4random()
-        let name = "image" + String(randomNum)
+        let name = "image" + String(randomNum) + ".png"
         print (name)
         // get image that was taken
         let image = receiptImage.image!
@@ -76,15 +76,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             // Filter the directory to capture images (images are not saved with an extension)
             let imgFiles = directoryContents.filter{ $0.pathExtension == ""}
             print("img urls:",imgFiles)
-            imgFiles.map{urlPaths.append($0)}
-            print(urlPaths)
+            for file in imgFiles {
+                urlPaths.append(file)
+            }
             
         } catch let error as NSError {
             print(error.localizedDescription)
         }
         // Attempting to zip it
         do {
-            _ = try Zip.quickZipFiles(urlPaths, fileName: "ZIPPEDFILE")
+            let z = try Zip.quickZipFiles(urlPaths, fileName: "TESTINGZIP")
+            print(z.path)
             // Take this out after adding in tests
             print("PASSED")
         } catch {
@@ -93,7 +95,25 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         // When implmenting email feature make sure to grab the zipped file from the document directory
         // After the file is zipped and emailed off,clear the doucment directory to avoid having images repeated
     }
-    
+    //Clear Document Directory
+    @IBAction func clearDD (sender: UIButton) {
+//        let fileManager = FileManager.default
+//        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+//        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+//        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+//        guard let dirPath = paths.first else {
+//            return
+//        }
+//        let filePath = "\(dirPath)/\(itemName).\(fileExtension)"
+//        do {
+//            try fileManager.removeItem(atPath: filePath)
+//        } catch let error as NSError {
+//            print(error.debugDescription)
+//        }
+        for path in documentsDirectoryURL{
+            print(path)
+        }
+    }
     
     // Implement imagePickerController Delegate Method
      func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
