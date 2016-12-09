@@ -81,30 +81,44 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
     func postImageProcessing(){
         // Update Label
         updateLabelAfterTakePhoto()
+        // Save Image
+        saveImage()
     }
     
-    // For Photo Library & Camera
+    // For Photo Library
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // Set Image
         receiptImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         receiptImage.contentMode = .scaleAspectFit
-        // Get URL of Image & Add To URL Path
-        let imageURL = info[UIImagePickerControllerReferenceURL] as! NSURL
-        let imageName = imageURL.lastPathComponent
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let currentDir = paths[0]
-        let localPath = currentDir.stringByAppendingPathComponent(aPath: imageName!)
-        let localPathURL = URL(fileURLWithPath: localPath)
-        // Save Image
-        let data = UIImagePNGRepresentation(receiptImage.image!)
-        do{
-            try data?.write(to: localPathURL)
-        }catch{}
-        // Add to urlPath
-        self.urlPaths.append(localPathURL)
-        // Post Image Processing
-        postImageProcessing()
-        imagePicker.dismiss(animated: true, completion: nil)
+        imagePicker.dismiss(animated: true, completion: {
+            // Post Image Processing
+            self.postImageProcessing()
+        })
+
+    }
+    
+    func saveImage(){
+        let randomNum = arc4random()
+        let name = "image" + String(randomNum) + ".png"
+        print (name)
+        // get image that was taken
+        let image = receiptImage.image!
+        // create fileURL to add to documents directory
+        let fileURL = documentsDirectoryURL.appendingPathComponent(name)
+        // turn image into a file and write it to the file URL, so that it saves to the document directory
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
+            let data = UIImagePNGRepresentation(image)!
+            do {
+                try data.write(to: fileURL)
+                print("Url: ", fileURL)
+                self.urlPaths.append(fileURL)
+            } catch {
+                print("THE ERROR")
+                print(error)
+            }
+        } else {
+            print("Image Not Added")
+        }
     }
     
     
