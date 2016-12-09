@@ -8,12 +8,16 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
 
     // MARK: Properties
     @IBOutlet weak var org: UITextField!
     @IBOutlet weak var role: UITextField!
+    
+    var orgs = Array<String>()
+    var roles = ["Member", "Signer", "Primary Contact"]
     
     // Nav Bar Button Actions
     @IBAction func cancel(_ sender: Any) {
@@ -57,9 +61,29 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
         }
     }
     
-    // TO BE FIXED: Get List of Orgs from API.
-    var orgs = ["OM", "Emerging Leaders", "Senate", "StuGov Cabinet"]
-    var roles = ["Member", "Signer", "Primary Contact"]
+    func loadAllOrgs(completionHandler: @escaping (Bool?, NSError?) -> ()){
+        var isLoading = true
+        // API Call to authenticate user
+        Alamofire.request("https://reimbursementapi.herokuapp.com/organizations", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .failure(let error):
+                // IDEAL CASE: SHOULD NEVER REACH FAILURE CASE
+                print("Error: ", error)
+                isLoading = true
+                completionHandler(isLoading, error as NSError?)
+            case .success(let value):
+                print("Successful Request")
+                let json = JSON(value)
+                print("Json: ", json)
+                // Loop through orgs
+                for (key,subJson):(String, JSON) in json {
+                    self.orgs.append(subJson["name"].stringValue)
+                }
+                isLoading = false
+                completionHandler(isLoading, nil)
+            } // End of AlamoFire Request Result
+        }// End of Alamofire Request
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,17 +93,33 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .lightContent
         
-        // Dropdown views
-        let orgPickerView = UIPickerView()
-        orgPickerView.tag = 0
-        orgPickerView.delegate = self
-        org.inputView = orgPickerView
+        // Dropdown Views
+        // Load Orgs
+        loadAllOrgs{
+            (isLoading, error) in
+            if isLoading == false{
+                let orgPickerView = UIPickerView()
+                orgPickerView.tag = 0
+                orgPickerView.delegate = self
+                orgPickerView.reloadAllComponents()
+                self.org.inputView = orgPickerView
+            }
+            else{
+                // Do nothing
+            }
+            
+        }
         
         let rolePickerView = UIPickerView()
         rolePickerView.tag = 1
         rolePickerView.delegate = self
         rolePickerView.selectRow(0, inComponent: 0, animated: true)
         role.inputView = rolePickerView
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+
     }
 
     override func didReceiveMemoryWarning() {

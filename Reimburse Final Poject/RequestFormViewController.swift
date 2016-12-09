@@ -20,7 +20,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     let S3BucketName = "reimbursementapi"
     
     // Zipped File of Receipts Passed from PhotoController
-    var zipReceiptImages: URL!
     var urlPaths = [URL]()
     
     // Values passed from Table View: indicate if text field has pre-set value and if editing is enabled or not
@@ -372,7 +371,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                                 "organization": self.org.text!,
                                 "total": Float(self.total.text!)!,
                                 "description": self.purchaseDescription.text!,
-                                "receipt_images": receiptsURL
+                                "receipt_images": receiptsURL,
+                                "requester_id": 1
                             ]
                         ]
                         // API Call to submit reimbursement request
