@@ -90,10 +90,11 @@ class DataManager {
                 ]
                 // API Call to authenticate user
                 Alamofire.request("https://reimbursementapi.herokuapp.com/login", method: .get, parameters: parameters).validate().responseJSON { response in
+                    print("Response: ", response)
                     switch response.result {
                     case .failure(let error):
                         // IDEAL CASE: SHOULD NEVER REACH FAILURE CASE
-                        print("Error")
+                        print("Error User Auth")
                     case .success(let value):
                         print("Successful Request")
                         let json = JSON(value)
