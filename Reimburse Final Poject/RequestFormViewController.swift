@@ -15,7 +15,7 @@ import AWSS3
 
 class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerViewDelegate, UITextViewDelegate {
     
-    // Amazon S3 
+    // Amazon S3
     // Initialize the Amazon Cognito credentials provider
     let S3BucketName = "reimbursementapi"
     
@@ -127,7 +127,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         // Scroll View
@@ -229,7 +229,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         super.viewWillLayoutSubviews()
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -273,9 +273,10 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     
     // MARK: - Validation Delegate Methods
     
-    func validationSuccessful() {
+    func sendImages(completionHandler: @escaping (String?, String?) -> ()){
+        var isLoading = true
         var receiptsURL = ""
-        // Submit Receipts 
+        // Submit Receipts
         for i in 0..<self.urlPaths.count{
             // 1. Get Image
             let img = UIImage(contentsOfFile: self.urlPaths[i].absoluteString)
@@ -306,54 +307,107 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                     print("Uploaded to:\n\(s3URL)")
                     // Append to String of URLs
                     receiptsURL += s3URL.absoluteString! + ","
+                    // If pushed all images, then submit reimbursement form
+                    if (i==self.urlPaths.count-1){
+                        isLoading = false
+                        completionHandler(receiptsURL, nil)
+                    }
                 }
                 else{
-                    print("Unexpected empty result")
+                    let error = "Unexpected empty result"
+                    print(error)
+                    isLoading = true
+                    completionHandler("", error)
                 }
                 return nil
             })// End of Push Images
         }// End of For Loop
-        
-        // Submit the Reimbursement form
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = DateFormatter.Style.short
-        let ed = dateFormatter.date(from: self.eventDate.text!)
-        let parameters: Parameters = [
-            "reimbursement":[
-                "event_date": ed!,
-                "event_name": self.eventName.text!,
-                "event_location": self.eventLoc.text!,
-                "num_of_attendees": Int(self.eventNumOfAttendees.text!)!,
-                "organization": self.org.text!,
-                "total": Float(self.total.text!)!,
-                "description": self.purchaseDescription.text!,
-                "receipt_images": receiptsURL
-            ]
-        ]
-        // API Call to submit reimbursement request
-        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
-            
-            var alert = UIAlertController()
-            var defaultAction = UIAlertAction()
-            
-            switch response.result {
-            case .success(let value):
-                print("Request Successful Outer A")
-                // Display Confirmation
-                let msg = "Submitted Request. \nPending Signer Approval"
-                alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                // Segue to Screen: list of reimbursement requests
-                defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
-            case .failure(let error):
-                print(error)
-                // Display Error
-                let msg = "Error while submitting request. \nPlease try again."
-                alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
-                defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            }// End of Outer Switch
-            alert.addAction(defaultAction)
-            self.present(alert, animated: true, completion: nil)
-        }// End of Outer Alamo Request
+    }
+    
+    func validationSuccessful() {
+        var receiptsURL = ""
+        // Submit Receipts
+        for i in 0..<self.urlPaths.count{
+            // 1. Get Image
+            let img = UIImage(contentsOfFile: self.urlPaths[i].absoluteString)
+            // 2. Prepare Uploader
+            let ext = "png"
+            let uploadRequest = AWSS3TransferManagerUploadRequest()
+            uploadRequest?.body = urlPaths[i]
+            // uploadRequest?.key = ProcessInfo.processInfo.globallyUniqueString + "." + ext
+            print("URL: ", self.urlPaths[i])
+            print("URL LC: ", self.urlPaths[i].lastPathComponent)
+            uploadRequest?.key = self.urlPaths[i].lastPathComponent
+            uploadRequest?.bucket = S3BucketName
+            uploadRequest?.contentType = "image/" + ext
+            // 3. Push Image to Server
+            var s3URL = NSURL()
+            let transferManager = AWSS3TransferManager.default()
+            transferManager?.upload(uploadRequest).continue({(task)->AnyObject! in
+                if let error = task.error{
+                    print ("Upload Failed: ", error)
+                }
+                if let exception = task.exception{
+                    print("Upload failed: ", exception)
+                }
+                if task.result != nil{
+                    let urlStr = "http://s3.amazonaws.com/\(self.S3BucketName)/\(uploadRequest?.key!)"
+                    let escUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                    s3URL = NSURL(string: escUrlStr)!
+                    print("Uploaded to:\n\(s3URL)")
+                    // Append to String of URLs
+                    receiptsURL += s3URL.absoluteString! + ","
+                    // Submit Reimbursement Form after pushing all images
+                    if i==self.urlPaths.count-1{
+                        // Submit the Reimbursement form
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateStyle = DateFormatter.Style.short
+                        let ed = dateFormatter.date(from: self.eventDate.text!)
+                        let parameters: Parameters = [
+                            "reimbursement":[
+                                "event_date": ed!,
+                                "event_name": self.eventName.text!,
+                                "event_location": self.eventLoc.text!,
+                                "num_of_attendees": Int(self.eventNumOfAttendees.text!)!,
+                                "organization": self.org.text!,
+                                "total": Float(self.total.text!)!,
+                                "description": self.purchaseDescription.text!,
+                                "receipt_images": receiptsURL
+                            ]
+                        ]
+                        // API Call to submit reimbursement request
+                        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .post, parameters: parameters).validate().responseJSON { response in
+                            
+                            var alert = UIAlertController()
+                            var defaultAction = UIAlertAction()
+                            
+                            switch response.result {
+                            case .success:
+                                print("Request Successful Outer A")
+                                // Display Confirmation
+                                let msg = "Submitted Request. \nPending Signer Approval"
+                                alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                                // Segue to Screen: list of reimbursement requests
+                                defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
+                            case .failure(let error):
+                                print(error)
+                                // Display Error
+                                let msg = "Error while submitting request. \nPlease try again."
+                                alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+                                defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            }// End of Outer Switch
+                            alert.addAction(defaultAction)
+                            self.present(alert, animated: true, completion: nil)
+                        }// End of Outer Alamo Request
+                    }
+                }
+                else{
+                    let error = "Unexpected empty result"
+                    print(error)
+                }
+                return nil
+            })// End of Push Images
+        }// End of For Loop
         
     }
     
@@ -393,17 +447,17 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         super.touchesBegan(touches, with: event)
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 // MARK: - Custom Validation Rules
@@ -432,7 +486,7 @@ class EventDateRule: Rule {
 }
 
 class NumericRule: Rule {
-
+    
     private var regex: String
     private var message: String
     
@@ -450,7 +504,7 @@ class NumericRule: Rule {
     public func errorMessage() -> String {
         return message
     }
-
+    
 }
 
 class InclusiveRule: Rule{
