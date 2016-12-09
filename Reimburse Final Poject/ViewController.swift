@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         Alamofire.request("https://reimbursementapi.herokuapp.com/login", method: .get, parameters: parameters).validate().responseJSON { response in
             switch response.result {
             case .failure(let error):
-                print("Error")
+                print("Error Login")
                 // Display Error Alert
                 let msg = "Invalid credentials"
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -43,6 +43,8 @@ class ViewController: UIViewController {
                 print("Json: ", json)
                 // Set Current User
                 self.currentUser = User(first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.password.text!)
+                // Save User
+                self.dataManager.saveUser()
                 // Show Requests List
                 self.performSegue(withIdentifier: "successLogin", sender: self)
             }

@@ -19,9 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveData() {
 //        let navigationController = window!.rootViewController as! UINavigationController
 //        let controller = navigationController.viewControllers[0] as! ViewController
-        let controller = window!.rootViewController as! ViewController
-        dataManager.user = controller.currentUser
-        dataManager.saveUser()
+        // If plist doesn't exist
+        if dataManager.user.andrewID.isEmpty {
+            let controller = window!.rootViewController as! ViewController
+            dataManager.user = controller.currentUser
+            dataManager.saveUser()
+        }
     }
     
     /**
@@ -30,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func restoreData() {
         dataManager.loadUser()
         let controller = window!.rootViewController as! ViewController
-        // let navigationController = window!.rootViewController as! UINavigationController
+//        // let navigationController = window!.rootViewController as! UINavigationController
         // let controller = navigationController.viewControllers[0] as! ViewController
         if !dataManager.user.andrewID.isEmpty {
             controller.currentUser = dataManager.user
