@@ -110,7 +110,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2374" y="457"/>
+            <point key="canvasLocation" x="2373.5999999999999" y="456.52173913043481"/>
         </scene>
         <!--REQUEST LISTS-->
         <scene sceneID="pnu-iI-Ool">
@@ -459,7 +459,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tartansLogo" translatesAutoresizingMaskIntoConstraints="NO" id="sJm-R7-q4F">
-                                <rect key="frame" x="0.0" y="401" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="1" yellow="0.79000000000000004" black="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0jG-Ty-6RH">
@@ -556,7 +556,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tartansLogo" translatesAutoresizingMaskIntoConstraints="NO" id="zeU-ze-Ben">
-                                <rect key="frame" x="0.0" y="401" width="375" height="222"/>
+                                <rect key="frame" x="0.0" y="445" width="375" height="222"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="1" yellow="0.79000000000000004" black="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGw-Pg-xTY">
@@ -825,8 +825,8 @@
         <image name="tjReceipt" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LFW-Df-wsq"/>
         <segue reference="VTb-wb-02r"/>
-        <segue reference="KdS-Fs-miK"/>
+        <segue reference="LFW-Df-wsq"/>
+        <segue reference="yOi-dl-zj2"/>
     </inferredMetricsTieBreakers>
 </document>
