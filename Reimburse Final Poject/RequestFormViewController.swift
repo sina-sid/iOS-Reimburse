@@ -118,7 +118,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     // Nav Bar Properties
     @IBOutlet weak var topNavBar: UINavigationItem!
     @IBOutlet weak var cancelBarButton: UIBarButtonItem!
-    @IBOutlet weak var saveBarButton: UIBarButtonItem!
+    // @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBAction func cancel(_ sender: Any) {
         self.performSegue(withIdentifier: "cancelReimbursementRequest", sender: self)
     }
@@ -137,15 +137,15 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         
         // Nav Bar Appearance
         cancelBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
-        saveBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
+//        saveBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
         let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
         self.navigationController?.navigationBar.titleTextAttributes = attrs
         
         // Nav Bar Buttons
-        saveBarButton.isEnabled = saveBarButtonIsEnabled
-        if !saveBarButtonIsEnabled{
-            saveBarButton.title=""
-        }
+//        saveBarButton.isEnabled = saveBarButtonIsEnabled
+//        if !saveBarButtonIsEnabled{
+//            saveBarButton.title=""
+//        }
         if cancelBarButtonIsHidden{
             cancelBarButton.title="Back"
         }
@@ -384,6 +384,8 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                             switch response.result {
                             case .success:
                                 print("Request Successful Outer A")
+                                // TO BE ADDED: Generate Email
+                                
                                 // Display Confirmation
                                 let msg = "Submitted Request. \nPending Signer Approval"
                                 alert = UIAlertController(title: "Success", message: msg, preferredStyle: UIAlertControllerStyle.alert)

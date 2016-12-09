@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func restoreData() {
         dataManager.loadUser()
+        // TO BE FIXED: Currently, exit the app on settings page. 
         let controller = window!.rootViewController as! ViewController
 //        // let navigationController = window!.rootViewController as! UINavigationController
         // let controller = navigationController.viewControllers[0] as! ViewController
