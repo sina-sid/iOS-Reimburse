@@ -11,6 +11,7 @@ import UIKit
 class User: NSObject, NSCoding{
     
     // MARK: Properties
+    var id: Int
     var first_name: String
     var last_name: String
     var andrewID: String
@@ -18,7 +19,8 @@ class User: NSObject, NSCoding{
     var smc: Int
     var password: String
     
-    init(first_name: String, last_name: String, andrewID: String, email: String, smc:Int, password:String){
+    init(id: Int, first_name: String, last_name: String, andrewID: String, email: String, smc:Int, password:String){
+        self.id = id
         self.first_name = first_name
         self.last_name = last_name
         self.andrewID = andrewID
@@ -30,6 +32,7 @@ class User: NSObject, NSCoding{
     
     // MARK: - Encoding
     required init(coder aDecoder: NSCoder) {
+        self.id = Int(aDecoder.decodeInt64(forKey: "id"))
         self.first_name = aDecoder.decodeObject(forKey: "FirstName") as! String
         self.last_name = aDecoder.decodeObject(forKey: "LastName") as! String
         self.andrewID = aDecoder.decodeObject(forKey: "AndrewID") as! String
@@ -40,6 +43,7 @@ class User: NSObject, NSCoding{
     }
     
     func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "ID")
         aCoder.encode(first_name, forKey: "FirstName")
         aCoder.encode(last_name, forKey: "LastName")
         aCoder.encode(andrewID, forKey: "AndrewID")

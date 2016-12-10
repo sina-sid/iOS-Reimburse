@@ -250,8 +250,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                     // Append to Requests Array
                     self.orgs += [userOrg.org]
                 }
-                // TO BE FIXED
-                self.orgs += ["Senate"]
+                self.orgs += ["Test Org"]
                 // Loading is complete
                 isLoading = false
                 completionHandler(isLoading, nil)
@@ -272,58 +271,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     }
     
     // MARK: - Validation Delegate Methods
-    
-    func sendImages(completionHandler: @escaping (String?, String?) -> ()){
-        var isLoading = true
-        var receiptsURL = ""
-        // Submit Receipts
-        for i in 0..<self.urlPaths.count{
-            // 1. Get Image
-            let img = UIImage(contentsOfFile: self.urlPaths[i].absoluteString)
-            // 2. Prepare Uploader
-            let ext = "png"
-            let uploadRequest = AWSS3TransferManagerUploadRequest()
-            uploadRequest?.body = urlPaths[i]
-            // uploadRequest?.key = ProcessInfo.processInfo.globallyUniqueString + "." + ext
-            print("URL: ", self.urlPaths[i])
-            print("URL LC: ", self.urlPaths[i].lastPathComponent)
-            uploadRequest?.key = self.urlPaths[i].lastPathComponent
-            uploadRequest?.bucket = S3BucketName
-            uploadRequest?.contentType = "image/" + ext
-            // 3. Push Image to Server
-            var s3URL = NSURL()
-            let transferManager = AWSS3TransferManager.default()
-            transferManager?.upload(uploadRequest).continue({(task)->AnyObject! in
-                if let error = task.error{
-                    print ("Upload Failed: ", error)
-                }
-                if let exception = task.exception{
-                    print("Upload failed: ", exception)
-                }
-                if task.result != nil{
-                    let urlStr = "http://s3.amazonaws.com/\(self.S3BucketName)/\(uploadRequest?.key!)"
-                    let escUrlStr = urlStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-                    s3URL = NSURL(string: escUrlStr)!
-                    print("Uploaded to:\n\(s3URL)")
-                    // Append to String of URLs
-                    receiptsURL += s3URL.absoluteString! + ","
-                    // If pushed all images, then submit reimbursement form
-                    if (i==self.urlPaths.count-1){
-                        isLoading = false
-                        completionHandler(receiptsURL, nil)
-                    }
-                }
-                else{
-                    let error = "Unexpected empty result"
-                    print(error)
-                    isLoading = true
-                    completionHandler("", error)
-                }
-                return nil
-            })// End of Push Images
-        }// End of For Loop
-    }
-    
     func validationSuccessful() {
         var receiptsURL = ""
         // Submit Receipts
@@ -359,6 +306,11 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                     receiptsURL += s3URL.absoluteString! + ","
                     // Submit Reimbursement Form after pushing all images
                     if i==self.urlPaths.count-1{
+                        
+                        // Get Requester Info from DataManager
+                        let ad = UIApplication.shared.delegate as! AppDelegate
+                        let requester = ad.dataManager.user
+                        
                         // Submit the Reimbursement form
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateStyle = DateFormatter.Style.short
@@ -373,7 +325,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                                 "total": Float(self.total.text!)!,
                                 "description": self.purchaseDescription.text!,
                                 "receipt_images": receiptsURL,
-                                "requester_id": 1
+                                "requester_id": requester.id
                             ]
                         ]
                         // API Call to submit reimbursement request

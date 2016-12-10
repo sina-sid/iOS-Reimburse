@@ -72,7 +72,7 @@ class SampleRequests{
         }
     }
     
-    // MARK: Load Sample Requests
+    // MARK: Load Sample Requests: FOR TESTING PURPOSES
     func loadSampleRequests(){
         
         // Submitted Requests

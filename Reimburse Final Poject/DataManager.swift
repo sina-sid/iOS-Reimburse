@@ -36,7 +36,7 @@ extension String {
 class DataManager {
     
     // MARK: - General
-    var user = User(first_name: "", last_name: "", andrewID: "", email: "", smc: 0000, password: "")
+    var user = User(id: 1, first_name: "", last_name: "", andrewID: "", email: "", smc: 0000, password: "")
     
     init() {
         loadUser()
@@ -100,7 +100,7 @@ class DataManager {
                         let json = JSON(value)
                         print("Json: ", json)
                         // Set Current User
-                        self.user = User(first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.user.password)
+                        self.user = User(id: Int(json["id"].stringValue)!, first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.user.password)
                     } // End of AlamoFire Request Result
                 }// End of Alamofire Request
             } else {

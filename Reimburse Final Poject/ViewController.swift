@@ -9,7 +9,7 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
-    var currentUser = User(first_name: "", last_name: "", andrewID: "", email: "", smc: 0000, password: "")
+    var currentUser = User(id: 1, first_name: "", last_name: "", andrewID: "", email: "", smc: 0000, password: "")
     var dataManager = DataManager()
     
     @IBOutlet weak var tartanFooter: UIImageView!
@@ -42,8 +42,9 @@ class ViewController: UIViewController {
                 let json = JSON(value)
                 print("Json: ", json)
                 // Set Current User
-                self.currentUser = User(first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.password.text!)
+                self.currentUser = User(id: Int(json["id"].stringValue)!, first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.password.text!)
                 // Save User
+                self.dataManager.user = self.currentUser
                 self.dataManager.saveUser()
                 // Show Requests List
                 self.performSegue(withIdentifier: "successLogin", sender: self)
