@@ -27,8 +27,11 @@ class SampleRequests{
     // MARK: Load Requests for User
     func loadRequestsForUser(completionHandler: @escaping (Bool?, NSError?) -> ()){
         var isLoading = true
+        let ad = UIApplication.shared.delegate as! AppDelegate
+        let u = ad.dataManager.user
+        let reqURL = "https://reimbursementapi.herokuapp.com/requests_for_user/" + String(u.id)
         // API Call to get reimbursement requests
-        Alamofire.request("https://reimbursementapi.herokuapp.com/reimbursements/", method: .get).validate().responseJSON { response in
+        Alamofire.request(reqURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 print("Validation Successful")
