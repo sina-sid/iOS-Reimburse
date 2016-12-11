@@ -5,14 +5,12 @@ PODS:
     - AWSCore (= 2.3.6)
   - SwiftValidator (4.0.0)
   - SwiftyJSON (3.1.3)
-  - Zip (0.6.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AWSS3 (~> 2.3.3)
   - SwiftValidator (from `https://github.com/jpotts18/SwiftValidator.git`, branch `master`)
   - SwiftyJSON
-  - Zip (~> 0.6)
 
 EXTERNAL SOURCES:
   SwiftValidator:
@@ -30,8 +28,7 @@ SPEC CHECKSUMS:
   AWSS3: 1caaf6b45100503fecf3d418c394519a89409a74
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
-  Zip: 805fc2fa9d2f05bbb7762d982d7a42ccdcc51f42
 
-PODFILE CHECKSUM: a175c791946f36e21b23a41a6dbe350beefac100
+PODFILE CHECKSUM: 181db571e3242588d4800f89351656b403f7bb9e
 
 COCOAPODS: 1.1.1
