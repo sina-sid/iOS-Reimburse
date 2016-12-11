@@ -274,6 +274,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             // 2. Prepare Uploader
             let ext = "png"
             let uploadRequest = AWSS3TransferManagerUploadRequest()
+            uploadRequest?.key = self.urlPaths[i].lastPathComponent
             uploadRequest?.body = urlPaths[i]
             uploadRequest?.bucket = S3BucketName
             uploadRequest?.contentType = "image/" + ext
