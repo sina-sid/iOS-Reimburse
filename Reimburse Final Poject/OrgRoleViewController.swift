@@ -53,7 +53,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
                 isLoading = false
                 completionHandler(isLoading, nil)
             case .failure(let error):
-                print(error)
+                print("Error: ", error)
                 isLoading = true
                 completionHandler(isLoading, error as NSError?)
             }
@@ -119,7 +119,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         Alamofire.request(reqURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
-                print("Validation Successful")
+                print("Successful Getting orgs for each user")
                 let json = JSON(value)
                 // Loop through requests
                 for (key,subJson):(String, JSON) in json {
@@ -132,7 +132,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
                 isLoading = false
                 completionHandler(isLoading, nil)
             case .failure(let error):
-                print(error)
+                print("Orgs for user error: ", error)
                 isLoading = true
                 completionHandler(isLoading, error as NSError?)
             }

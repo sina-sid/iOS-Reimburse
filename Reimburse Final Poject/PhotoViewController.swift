@@ -113,8 +113,7 @@ class PhotoViewController: UIViewController, UINavigationControllerDelegate, UII
                 print("Url: ", fileURL)
                 self.urlPaths.append(fileURL)
             } catch {
-                print("THE ERROR")
-                print(error)
+                print("THE ERROR: ", error)
             }
         } else {
             print("Image Not Added")

@@ -241,7 +241,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         Alamofire.request("https://reimbursementapi.herokuapp.com/user_orgs/", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
-                print("Validation Successful")
+                print("Successful user org get")
                 let json = JSON(value)
                 // Loop through requests
                 for (key,subJson):(String, JSON) in json {
@@ -255,7 +255,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 isLoading = false
                 completionHandler(isLoading, nil)
             case .failure(let error):
-                print(error)
+                print("Error: ", error)
                 isLoading = true
                 completionHandler(isLoading, error as NSError?)
             }
@@ -281,10 +281,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             let ext = "png"
             let uploadRequest = AWSS3TransferManagerUploadRequest()
             uploadRequest?.body = urlPaths[i]
-            // uploadRequest?.key = ProcessInfo.processInfo.globallyUniqueString + "." + ext
-            print("URL: ", self.urlPaths[i])
-            print("URL LC: ", self.urlPaths[i].lastPathComponent)
-            uploadRequest?.key = self.urlPaths[i].lastPathComponent
             uploadRequest?.bucket = S3BucketName
             uploadRequest?.contentType = "image/" + ext
             // 3. Push Image to Server
@@ -345,7 +341,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                                 // Segue to Screen: list of reimbursement requests
                                 defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.performSegue(withIdentifier: "successRequestSubmission", sender: self) })
                             case .failure(let error):
-                                print(error)
+                                print("Error: ", error)
                                 // Display Error
                                 let msg = "Error while submitting request. \nPlease try again."
                                 alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -358,7 +354,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
                 }
                 else{
                     let error = "Unexpected empty result"
-                    print(error)
+                    print("Error: ", error)
                 }
                 return nil
             })// End of Push Images

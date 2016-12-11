@@ -90,15 +90,13 @@ class DataManager {
                 ]
                 // API Call to authenticate user
                 Alamofire.request("https://reimbursementapi.herokuapp.com/login", method: .get, parameters: parameters).validate().responseJSON { response in
-                    print("Response: ", response)
                     switch response.result {
                     case .failure(let error):
                         // IDEAL CASE: SHOULD NEVER REACH FAILURE CASE
                         print("Error User Auth")
                     case .success(let value):
-                        print("Successful Request")
+                        print("Successful Auth Request")
                         let json = JSON(value)
-                        print("Json: ", json)
                         // Set Current User
                         self.user = User(id: Int(json["id"].stringValue)!, first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.user.password)
                     } // End of AlamoFire Request Result
@@ -119,20 +117,6 @@ class DataManager {
         user.email=""
         user.smc = 0000
         saveUser()
-    }
-    func destroyUser() {
-        let path = dataFilePath()
-        if FileManager.default.fileExists(atPath: path) {
-            if let data = NSMutableDictionary(contentsOfFile: path){
-                // TO BE FIXED: DOESN"T WORK CURRENTLY
-                data.removeObject(forKey: "User")
-                // Save Changes to Plist
-                data.write(toFile: path, atomically: true)
-            }
-            else{
-                print("\nFILE NOT FOUND AT: \(path)")
-            }
-        }
     }
     
 }

@@ -68,7 +68,7 @@ class SampleRequests{
                 isLoading = false
                 completionHandler(isLoading, nil)
             case .failure(let error):
-                print(error)
+                print("error: ", error)
                 isLoading = true
                 completionHandler(isLoading, error as NSError?)
             }

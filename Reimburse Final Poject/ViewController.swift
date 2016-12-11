@@ -40,7 +40,6 @@ class ViewController: UIViewController {
             case .success(let value):
                 print("Successful Request")
                 let json = JSON(value)
-                print("Json: ", json)
                 // Set Current User
                 self.currentUser = User(id: Int(json["id"].stringValue)!, first_name: json["first_name"].stringValue, last_name: json["last_name"].stringValue, andrewID: json["andrewid"].stringValue, email: json["email"].stringValue, smc: Int(json["smc"].stringValue)!, password: self.password.text!)
                 // Save User

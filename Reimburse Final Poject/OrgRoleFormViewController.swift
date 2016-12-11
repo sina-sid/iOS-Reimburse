@@ -46,13 +46,13 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
             
             switch response.result {
             case .success:
-                print("Successful Request")
+                print("Successful Request To Create New UserOrg")
                 // Reload Table
                 // Segue to Screen: list of orgs & roles
                 self.performSegue(withIdentifier: "showOrgRoleList", sender: self)
                 
             case .failure(let error):
-                print(error)
+                print("Error in userorg create: ", error)
                 // Display Error
                 let msg = "Error while submitting request. \nPlease try again."
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
@@ -70,11 +70,11 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
             switch response.result {
             case .failure(let error):
                 // IDEAL CASE: SHOULD NEVER REACH FAILURE CASE
-                print("Error: ", error)
+                print("Error in loading orgs: ", error)
                 isLoading = true
                 completionHandler(isLoading, error as NSError?)
             case .success(let value):
-                print("Successful Request")
+                print("Successful Org Load Request")
                 let json = JSON(value)
                 print("Json: ", json)
                 // Loop through orgs
