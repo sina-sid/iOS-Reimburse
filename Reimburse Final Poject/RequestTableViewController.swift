@@ -2,9 +2,10 @@
 //  RequestsTableViewController.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 11/13/16.
-//  Copyright © 2016 Sina Siddiqi. All rights reserved.
-//
+//  PURPOSE:
+//  Table View with submitted and approved requests. 
+//  Click on request to see more info in RequestFormVC
+//  Nav Bar buttons: Settings button to add orgs + Create new Request
 
 import UIKit
 
@@ -38,7 +39,7 @@ class RequestTableViewController: UITableViewController {
             }
             else{
                 print("Error: ", error)
-                // Display Alert
+                // Display Error Alert
                 let msg = "Error Loading App. \nPlease Reload App"
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -64,12 +65,10 @@ class RequestTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return sampleReq.sampleReqs.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         let numOfRows = sampleReq.sampleReqs[section].count
         if numOfRows < 1{
             return 1 // To display msg indicating no requests in given section
@@ -157,7 +156,7 @@ class RequestTableViewController: UITableViewController {
                 let formView:RequestFormViewController = navController.topViewController as! RequestFormViewController
                 let index = tableView.indexPath(for: cell)
                 let request = sampleReq.sampleReqs[index!.section][index!.row]
-                // set form info
+                // set form info and variables to pre-populate form and disable editing
                 formView.en = request.event_name
                 let df = DateFormatter()
                 formView.ed = df.string(from: request.event_date)
@@ -167,7 +166,7 @@ class RequestTableViewController: UITableViewController {
                 formView.tot = String(request.total)
                 formView.pd = request.description
                 formView.disableFieldEditing = true
-                // set nav bar
+                // set nav bar, i.e. hide buttons
                 formView.submitButtonIsHidden = true
                 formView.saveBarButtonIsEnabled = false
                 formView.cancelBarButtonIsHidden = true

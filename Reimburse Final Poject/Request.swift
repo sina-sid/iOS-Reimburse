@@ -2,9 +2,7 @@
 //  Request.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 11/13/16.
-//  Copyright © 2016 Sina Siddiqi. All rights reserved.
-//
+//  PURPOSE: Request information
 
 import UIKit
 import Alamofire

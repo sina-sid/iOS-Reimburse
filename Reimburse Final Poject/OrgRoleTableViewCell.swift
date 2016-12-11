@@ -2,9 +2,7 @@
 //  OrgRoleTableViewCell.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 12/5/16.
-//
-//
+//  PURPOSE: View Model for Cell in OrgRoleTable VC
 
 import UIKit
 

@@ -2,9 +2,8 @@
 //  OrgRole.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 12/6/16.
-//
-//
+//  PURPOSE: Model to store org + role for each user
+//  Class Method that returns array of orgs in which user's role == MEMBER
 
 import UIKit
 import Alamofire

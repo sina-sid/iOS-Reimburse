@@ -2,9 +2,7 @@
 //  SampleRequests.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 11/13/16.
-//  Copyright © 2016 Sina Siddiqi. All rights reserved.
-//
+//  PURPOSE: Load Requests (both for App and Testing): Submitted + Approved for Current User
 
 import UIKit
 import Alamofire
@@ -19,6 +17,7 @@ class SampleRequests{
     
     let typesOfReqs = ["Submitted Requests", "Approved Requests"]
     
+//    FOR TESTING:
 //    init(){
 //        // loadSampleRequests()
 //        // loadRequestsForUser()
@@ -41,6 +40,7 @@ class SampleRequests{
                 df.dateFormat = "yyyy/MM/dd"
                 // Loop through requests
                 for (key,subJson):(String, JSON) in json {
+                    // Get Request Model Params
                     var approvalDate: Date? = nil
                     if subJson["approval_date"] is NSNull{
                         approvalDate = nil
@@ -54,7 +54,7 @@ class SampleRequests{
                     let noa = Int(subJson["num_of_attendees"].stringValue)
                     // Create Request Object
                     let req = Request(total: tot!, description: subJson["description"].stringValue, approval_date: approvalDate, request_date: reqDate!, organization: subJson["organization"].stringValue, event_date: eventDate!, event_name: subJson["event_name"].stringValue, event_location: subJson["event_location"].stringValue, num_of_attendees: noa!)
-                    // Append to Requests Array
+                    // Append to Requests Array Based On Submitted/ Approved
                     if approvalDate == nil {
                         self.submittedRequests += [req]
                     }

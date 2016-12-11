@@ -2,6 +2,9 @@
 //  ViewController.swift
 //  Reimburse Final Project
 //
+//  PURPOSE:
+//  Login User: Dummy Shibboleth. Hence, no register button
+//  Call to save user info to plist and set current user
 
 import UIKit
 import Alamofire
@@ -54,9 +57,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib
+        
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .default
         
+        // Load User if already exists
         dataManager.loadUser()
     }
 

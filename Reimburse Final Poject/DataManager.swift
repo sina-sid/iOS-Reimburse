@@ -2,9 +2,7 @@
 //  DataManager.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 12/6/16.
-//
-//
+//  PURPOSE: Save, Load, Clear User Info in Plist
 
 import Foundation
 import Alamofire

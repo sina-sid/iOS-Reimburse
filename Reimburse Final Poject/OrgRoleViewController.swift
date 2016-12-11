@@ -2,9 +2,9 @@
 //  OrgRoleViewController.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 12/5/16.
-//
-//
+//  PURPOSE:
+//  Table View that Displays Organizations for a given user. 
+//  Nav Bar Buttons to Add Orgs + Move to Requests Table + Logout
 
 import UIKit
 import Alamofire
@@ -26,14 +26,13 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         logoutCurrentUser{ (isLoading, error) in
             if isLoading == false{
                 // Delete Info From Plist If Saved
-                // self.dataManager.destroyUser()
                 self.dataManager.clearUserInfo()
                 // Segue to Login View Controller
                 self.performSegue(withIdentifier: "logoutSegue", sender: self)
             }
             else{
                 print("Error: ", error)
-                // Display Alert
+                // Display Error Alert
                 let msg = "Couldn't Log Out. \nPlease Try Again."
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -59,13 +58,16 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
+    
+    // Segue to add org to user profile
     @IBAction func newUserOrg(_ sender: Any) {
         self.performSegue(withIdentifier: "orgRoleSegue", sender: self)
     }
+    // Done adding ors to profile
     @IBAction func done(_ sender: Any) {
         // Allow Transition to View Requests List only after selecting atleast one org.
         if orgRoles.count < 1{
-            // Display Alert
+            // Display Error Alert
             let msg = "Please Select atleast one organization."
             let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -92,7 +94,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         alert.addAction(defaultAction)
         self.present(alert, animated: true, completion: nil)
         
-        // Setup Table
+        // Setup Table with list of orgs
         userListTable.dataSource = self
         loadOrgRoles{ (isLoading, error) in
             if isLoading == false{
@@ -100,7 +102,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
             }
             else{
                 print("Error: ", error!)
-                // Display Alert
+                // Display Error Alert
                 let msg = "Error Loading App. \nPlease Reload App"
                 let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -110,6 +112,7 @@ class OrgRoleViewController: UIViewController, UITableViewDataSource {
         }
     }
     
+    // Load Orgs for Each User
     func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
         var isLoading = true
         // API Call to get org roles

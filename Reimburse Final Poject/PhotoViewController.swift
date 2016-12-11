@@ -2,13 +2,13 @@
 //  PhotoViewController.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 12/7/16.
-//
-//
+//  PURPOSE:
+//  Take Images of Multiple Receipts and attach to request form
+//  Save Image and Add to URL array to attach to form
+//  In future, implement delete images after submission to save memory
 
 import UIKit
 import Foundation
-import Zip
 
 class PhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     

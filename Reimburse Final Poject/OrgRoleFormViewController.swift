@@ -2,9 +2,9 @@
 //  OrgRoleFormViewController.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 12/5/16.
-//
-//
+//  PURPOSE:
+//  Form to Add New Org For User: Select Org + Role in that Org (e.g. Member/ Signer/ Primary Contact)
+//  Nav Bar Buttons: Cancel
 
 import UIKit
 import Alamofire
@@ -95,7 +95,7 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
         // Status Bar Appearance
         UIApplication.shared.statusBarStyle = .lightContent
         
-        // Dropdown Views
+        // Dropdown View for Orgs
         // Load Orgs
         loadAllOrgs{
             (isLoading, error) in
@@ -109,15 +109,11 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
             }
             
         }
-        
+        // Dropdown View for Roles
         rolePickerView.delegate = self
         rolePickerView.selectRow(0, inComponent: 0, animated: true)
         role.inputView = rolePickerView
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-
     }
 
     override func didReceiveMemoryWarning() {

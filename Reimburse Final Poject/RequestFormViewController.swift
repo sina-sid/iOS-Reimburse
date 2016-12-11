@@ -2,9 +2,10 @@
 //  RequestFormViewController.swift
 //  Reimburse Final Project
 //
-//  Created by Gaury Nagaraju on 11/21/16.
-//
-//
+//  PURPOSE:
+//  Create New reimbursement form (Event and amount details) and submit for approval.
+//  Also used to Show past requests submitted - editing disabled mode
+//  Nav Bar Buttons: Cancel or Save (To be implemented in future)
 
 import Foundation
 import UIKit
@@ -19,7 +20,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     // Initialize the Amazon Cognito credentials provider
     let S3BucketName = "reimbursementapi"
     
-    // Zipped File of Receipts Passed from PhotoController
+    // Pictures of Receipts Passed from PhotoController
     var urlPaths = [URL]()
     
     // Values passed from Table View: indicate if text field has pre-set value and if editing is enabled or not
@@ -42,6 +43,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     let validator = Validator()
     
     // MARK: - Properties
+    // DidSet: If we are showing past submitted request, fields have pre-populated values and can't be edited
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContentView: UIView!
     @IBOutlet weak var eventName: UITextField!{
@@ -137,16 +139,10 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         
         // Nav Bar Appearance
         cancelBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
-//        saveBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 12.0)], for: UIControlState.normal)
         let attrs = [NSForegroundColorAttributeName:UIColor.white, NSFontAttributeName: UIFont.systemFont(ofSize: 14.0)]
         self.navigationController?.navigationBar.titleTextAttributes = attrs
         
         // Nav Bar Buttons
-        // Save Button: Not implemented Currently
-//        saveBarButton.isEnabled = saveBarButtonIsEnabled
-//        if !saveBarButtonIsEnabled{
-//            saveBarButton.title=""
-//        }
         if cancelBarButtonIsHidden{
             cancelBarButton.title="Back"
         }
@@ -172,8 +168,6 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             if isLoading == false{
                 let pickerView = UIPickerView()
                 pickerView.delegate = self
-                // pickerView.dataSource = self
-                // pickerView.reloadAllComponents()
                 self.org.inputView = pickerView
             }
             else{
@@ -189,7 +183,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         
         // Validated Fields Display: Red or Green
         validator.styleTransformers(success:{ (validationRule) -> Void in
-            // If Error Labels Added: clear error label
+            // If Error Labels Added: clear error label, i.e. Uncomment below 2 lines
             // validationRule.errorLabel?.isHidden = true
             // validationRule.errorLabel?.text = ""
             if let textField = validationRule.field as? UITextField {
@@ -206,10 +200,9 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
             }
         })
         
-        // Validations
+        // Validations For all fields
         validator.registerField(eventName, rules: [RequiredRule()])
         validator.registerField(eventLoc, rules: [RequiredRule()])
-        // validator.registerField(eventDate, rules: [RequiredRule(), EventDateRule()])
         validator.registerField(eventDate, rules: [RequiredRule()])
         validator.registerField(eventNumOfAttendees, rules: [RequiredRule(), NumericRule()])
         // validator.registerField(org, rules: [RequiredRule(), InclusiveRule(orgList: orgs)])
@@ -235,6 +228,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
         // Dispose of any resources that can be recreated.
     }
     
+    // Load Orgs for Each User to display in dropdown menu
     func loadOrgRoles(completionHandler: @escaping (Bool?, NSError?) -> ()){
         var isLoading = true
         // API Call to get org roles
@@ -411,7 +405,7 @@ class RequestFormViewController: UIViewController, ValidationDelegate, UIPickerV
     
 }
 
-// MARK: - Custom Validation Rules
+// MARK: - Custom Validation Rules for Swift validator
 class EventDateRule: Rule {
     // NOTE: THIS RULE ISN'T CURRENTLY USED SINCE EVENT DATE CAN BE IN FUTURE. DATE FORMAT IS ENSURED USING DATE PICKER
     private var message:String
