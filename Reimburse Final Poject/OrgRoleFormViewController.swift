@@ -18,6 +18,8 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
     
     var orgs = Array<String>()
     var roles = ["Member", "Signer", "Primary Contact"]
+    let orgPickerView = UIPickerView()
+    let rolePickerView = UIPickerView()
     
     // Nav Bar Button Actions
     @IBAction func cancel(_ sender: Any) {
@@ -98,11 +100,9 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
         loadAllOrgs{
             (isLoading, error) in
             if isLoading == false{
-                let orgPickerView = UIPickerView()
-                orgPickerView.tag = 0
-                orgPickerView.delegate = self
-                orgPickerView.reloadAllComponents()
-                self.org.inputView = orgPickerView
+                self.orgPickerView.delegate = self
+                self.orgPickerView.reloadAllComponents()
+                self.org.inputView = self.orgPickerView
             }
             else{
                 // Do nothing
@@ -110,8 +110,6 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
             
         }
         
-        let rolePickerView = UIPickerView()
-        rolePickerView.tag = 1
         rolePickerView.delegate = self
         rolePickerView.selectRow(0, inComponent: 0, animated: true)
         role.inputView = rolePickerView
@@ -133,31 +131,30 @@ class OrgRoleFormViewController: UIViewController, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 0{
+        if pickerView == orgPickerView{
             return orgs.count
         }
-        else if pickerView.tag == 1{
+        else if pickerView == rolePickerView{
             return roles.count
         }
         return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 0{
+        if pickerView == orgPickerView{
             return orgs[row]
         }
-        else if pickerView.tag == 1{
+        else if pickerView == rolePickerView{
             return roles[row]
         }
         return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        org.text = orgs[row]
-        if pickerView.tag == 0{
+        if pickerView == orgPickerView{
             org.text = orgs[row]
         }
-        else if pickerView.tag == 1{
+        else if pickerView == rolePickerView{
             role.text = roles[row]
         }
     }
