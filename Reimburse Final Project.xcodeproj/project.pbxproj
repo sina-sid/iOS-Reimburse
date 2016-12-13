@@ -25,6 +25,9 @@
 		924401FC1DF738B9005EFCB6 /* OrgRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924401FB1DF738B9005EFCB6 /* OrgRole.swift */; };
 		924401FE1DF790D4005EFCB6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924401FD1DF790D4005EFCB6 /* DataManager.swift */; };
 		928816C21DF8E13E003E0F9E /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928816C11DF8E13E003E0F9E /* PhotoViewController.swift */; };
+		928F0C2B1E0025340077FFEA /* SampleRequestsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928F0C2A1E0025340077FFEA /* SampleRequestsTest.swift */; };
+		928F0C2D1E003A230077FFEA /* OrgRoleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928F0C2C1E003A230077FFEA /* OrgRoleTest.swift */; };
+		928F0C2F1E003B430077FFEA /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928F0C2E1E003B430077FFEA /* DataManagerTest.swift */; };
 		929D6D6A1DE3899E007A285F /* RequestFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929D6D691DE3899E007A285F /* RequestFormViewController.swift */; };
 		92E285BD1DD8BFA500B87D0B /* RequestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E285BC1DD8BFA500B87D0B /* RequestTableViewController.swift */; };
 		92E285BF1DD8BFF400B87D0B /* RequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E285BE1DD8BFF400B87D0B /* RequestTableViewCell.swift */; };
@@ -79,6 +82,9 @@
 		924401FD1DF790D4005EFCB6 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		925A39B11DFA149300C09B4D /* Reimburse Final Project.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Reimburse Final Project.entitlements"; sourceTree = SOURCE_ROOT; };
 		928816C11DF8E13E003E0F9E /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		928F0C2A1E0025340077FFEA /* SampleRequestsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleRequestsTest.swift; sourceTree = "<group>"; };
+		928F0C2C1E003A230077FFEA /* OrgRoleTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrgRoleTest.swift; sourceTree = "<group>"; };
+		928F0C2E1E003B430077FFEA /* DataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
 		929D6D691DE3899E007A285F /* RequestFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestFormViewController.swift; sourceTree = "<group>"; };
 		92E285BC1DD8BFA500B87D0B /* RequestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTableViewController.swift; sourceTree = "<group>"; };
 		92E285BE1DD8BFF400B87D0B /* RequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTableViewCell.swift; sourceTree = "<group>"; };
@@ -167,6 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				0616352A1DD38B5000EBC29E /* Reimburse_Final_ProjectTests.swift */,
+				928F0C2A1E0025340077FFEA /* SampleRequestsTest.swift */,
+				928F0C2C1E003A230077FFEA /* OrgRoleTest.swift */,
+				928F0C2E1E003B430077FFEA /* DataManagerTest.swift */,
 				0616352C1DD38B5000EBC29E /* Info.plist */,
 			);
 			name = "Reimburse Final ProjectTests";
@@ -563,6 +572,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0616352B1DD38B5000EBC29E /* Reimburse_Final_ProjectTests.swift in Sources */,
+				928F0C2F1E003B430077FFEA /* DataManagerTest.swift in Sources */,
+				928F0C2D1E003A230077FFEA /* OrgRoleTest.swift in Sources */,
+				928F0C2B1E0025340077FFEA /* SampleRequestsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,7 +738,7 @@
 			baseConfigurationReference = FEC3C72AEA3A375863B8B56B /* Pods-Reimburse Final ProjectTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Reimburse Final ProjectTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Reimburse Final Poject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -740,7 +752,7 @@
 			baseConfigurationReference = 59EAE49F870E965C2112AE5F /* Pods-Reimburse Final ProjectTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Reimburse Final ProjectTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Reimburse Final Poject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -753,12 +765,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 427EB2DE086961A9B05FB12E /* Pods-Reimburse Final ProjectUITests.debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Reimburse Final ProjectUITests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Reimburse Final Poject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Reimburse Final Poject";
+				TEST_TARGET_NAME = "Reimburse Final Project";
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -767,12 +780,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A2DCE8AB1FCBEC90F31FDD48 /* Pods-Reimburse Final ProjectUITests.release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Reimburse Final ProjectUITests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Reimburse Final Poject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "sinas.Reimburse-Final-PojectUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Reimburse Final Poject";
+				TEST_TARGET_NAME = "Reimburse Final Project";
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
