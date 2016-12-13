@@ -109,9 +109,11 @@ class DataManager {
      Clear user data from a plist.
      */
     func clearUserInfo(){
+        user.id=1
         user.first_name=""
         user.last_name=""
         user.andrewID = ""
+        user.password = ""
         user.email=""
         user.smc = 0000
         saveUser()
